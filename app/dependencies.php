@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 use DI\ContainerBuilder;
@@ -32,6 +33,8 @@ return function (ContainerBuilder $containerBuilder) {
         $renderer = new PhpRenderer($settings['template_path']);
         return $renderer;
     };
+
+    $container['LoginController'] = DI\factory('\App\Factories\LoginControllerFactory');
 
     $containerBuilder->addDefinitions($container);
 };
