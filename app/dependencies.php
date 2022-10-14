@@ -39,5 +39,11 @@ return function (ContainerBuilder $containerBuilder) {
         return $db;
     };
 
+    // controllers
+    $container['AcceptLoginController'] = DI\factory('\App\Factories\AcceptLoginControllerFactory');
+
+    // models
+    $container['UserModel'] = DI\factory('\App\Factories\UserModelFactory');
+
     $containerBuilder->addDefinitions($container);
 };

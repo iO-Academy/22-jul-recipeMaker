@@ -19,6 +19,16 @@ class UserModel
         ");
         $query->bindParam(':email', $email);
         $query->execute();
+        return $query;
+    }
+
+    public function getAllUsers()
+    {
+        $query = $this->db->prepare("
+            SELECT `id`, `email`
+                FROM `users`;
+        ");
+        $query->execute();
         return $query->fetchAll();
     }
 }
