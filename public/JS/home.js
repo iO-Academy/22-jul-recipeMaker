@@ -11,3 +11,21 @@ addRecipeBtn.addEventListener('click', (e) => {
         e.currentTarget.textContent = "-"
       }
 });
+
+const submitRecipeBtn = document.querySelector('#submitRecipeBtn')
+
+submitRecipeBtn.addEventListener('click', (e) => {
+    e.preventDefault()
+    //validate & sanitise
+    //insert fetch request
+})
+
+const validateString = (string) => {
+    let pattern = /^[a-z0-9 ,.'-]+$/i;
+    if(pattern.test(string) && string.length < 255) {
+        return true
+    } else {
+        return false
+    }
+
+}
