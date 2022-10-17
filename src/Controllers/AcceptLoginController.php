@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Abstracts\Controller;
 use App\Models\UserModel;
+use App\Sanitisers\UserSanitiser;
 use App\Validators\UserValidator;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
@@ -31,16 +32,13 @@ class AcceptLoginController extends Controller
         try {
             $currentUsers = $this->userModel->getAllUsers();
 
-            // need to create these classes and functions
             if (UserValidator::validateEmail($userEmail['email'])) {
-                $userEmail = UserSanitiser::sanitise($userEmail);
+                $userEmail = UserSanitiser::sanitiseEmail($userEmail['email']);
                 if (in_array($userEmail['email'], $currentUsers)) {
-                    // log user in
                     $message = 'Successfully signed in';
                     $result = true;
                 } else {
                     $result = $this->userModel->addUser($userEmail);
-                    // log user in
                     $message = 'User added to DB';
                 }
             }

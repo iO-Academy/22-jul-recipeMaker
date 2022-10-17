@@ -1,8 +1,8 @@
 <?php
+
 declare(strict_types=1);
 
 use Slim\App;
-use Slim\Interfaces\RouteCollectorProxyInterface as Group;
 
 return function (App $app) {
     $container = $app->getContainer();
@@ -12,6 +12,5 @@ return function (App $app) {
         return $renderer->render($response, "index.php", $args);
     });
 
-    $app->post('/login', AcceptLoginController);
-
+    $app->post('/login', 'AcceptLoginController');
 };
