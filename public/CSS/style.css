@@ -22,3 +22,18 @@ body {
 .loginForm p {
     font-size: 0.9em;
 }
+
+#addRecipeBtn {
+    font-size: 2rem;
+}
+
+.addRecipeAccordion {
+    background-color: rgb(208, 244, 247);
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.2s ease-out;
+}
+
+.addRecipeAccordion label {
+    font-size: 1.5rem;
+}
