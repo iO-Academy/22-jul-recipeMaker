@@ -38,9 +38,11 @@ class AcceptLoginController extends Controller
                 if (in_array($userEmail, $currentUsers)) {
                     $message = 'Successfully signed in';
                     $result = true;
+                    $_SESSION[$userEmail] = true;
                 } else {
                     $result = $this->userModel->addUser($userEmail);
                     $message = 'User added to DB';
+                    $_SESSION[$userEmail] = true;
                 }
             } else {
                 throw new InvalidEmailException('This email is invalid');
