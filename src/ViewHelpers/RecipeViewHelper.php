@@ -8,7 +8,7 @@ class RecipeViewhelper
     {
         $result = '';
         foreach ($userRecipes as $userRecipe) {
-            $result .= '<div class="col recipe m-3 p-0">';
+            $result .= '<div class="col-12 col-lg-3 recipe m-3 p-0">';
             $result .= '<div class="d-flex align-items-center m-2 justify-content-between">';
             $result .= '<h2>' . $userRecipe->getName() . '</h2>';
             $result .= '<h3>' . $userRecipe->getDuration() . ' minutes</h3></div>';
