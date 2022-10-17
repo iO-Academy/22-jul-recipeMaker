@@ -37,3 +37,7 @@ body {
 .addRecipeAccordion label {
     font-size: 1.5rem;
 }
+
+.cookingTimes {
+    background-color: #a8ebeb;
+}
