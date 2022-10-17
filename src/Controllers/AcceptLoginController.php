@@ -34,17 +34,24 @@ class AcceptLoginController extends Controller
             $currentUsers = $this->userModel->getAllUsers();
 
             if (UserValidator::validateEmail($userEmail['email'])) {
-                $userEmail = UserSanitiser::sanitiseEmail($userEmail['email']);
-                foreach ($currentUsers as $user) {
-                    if ($user['email'] === $userEmail) {
-                        $message = 'Successfully signed in';
-                        $result = true;
-                        $_SESSION[$userEmail] = true;
+                $validatedEmail = UserSanitiser::sanitiseEmail($userEmail['email']);
+                $filterResult = array_filter($currentUsers, function ($user) use ($validatedEmail) {
+                    if ($user['email'] === $validatedEmail) {
+                        return true;
                     } else {
-                        $result = $this->userModel->addUser($userEmail);
-                        $message = 'User added to DB';
-                        $_SESSION[$userEmail] = true;
+                        return false;
                     }
+                });
+                if (count($filterResult) !== 0) {
+                    $message = 'Successfully signed in';
+                    $result = true;
+                    $_SESSION['loggedIn'] = true;
+                    $_SESSION['user'] = $validatedEmail;
+                } else {
+                    $result = $this->userModel->addUser($validatedEmail);
+                    $message = 'User added to DB';
+                    $_SESSION['loggedIn'] = true;
+                    $_SESSION['user'] = $validatedEmail;
                 }
             } else {
                 throw new InvalidEmailException('This email is invalid');
