@@ -18,6 +18,10 @@ class LoginController extends Controller
 
     public function __invoke(Request $request, Response $response, array $args)
     {
-        return $this->renderer->render($response, 'login.phtml', $args);
+        if ($_SESSION['loggedIn'] == true) {
+            return $this->renderer->render($response, 'home.phtml', $args);
+        } else {
+            return $response->withHeader('Location', '/login');
+        }
     }
 }
