@@ -11,7 +11,7 @@ class RecipeModel
         $this->db = $db;
     }
 
-    public function getUsersRecipes($email)
+    public function getUserRecipes($email)
     {
         $query = $this->db->prepare("
         SELECT `name`, `duration`, `cookTime`, `prepTime`, `instructions`, `recipeId`, `userId`, `email`
