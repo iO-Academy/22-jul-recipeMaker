@@ -12,5 +12,6 @@ return function (App $app) {
         return $renderer->render($response, "index.php", $args);
     });
 
+    $app->get('/login', 'LoginController');
     $app->post('/login', 'AcceptLoginController');
 };
