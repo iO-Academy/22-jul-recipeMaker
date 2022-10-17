@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Entities\RecipeEntity;
+
 class RecipeModel
 {
     private $db;
