@@ -15,8 +15,10 @@
     <nav class="navbar row navbar-light mx-0">
         <h1 class="col-12 text-center my-3">Fish Food</h1>
     </nav>
-    <main>
-        <?= \App\ViewHelpers\RecipeViewhelper::displayUserRecipes($userRecipes) ?>
+    <main class="container-fluid">
+        <div class="row">
+            <?= \App\ViewHelpers\RecipeViewhelper::displayUserRecipes($userRecipes) ?>
+        </div>
     </main>
 </body>
 </html>

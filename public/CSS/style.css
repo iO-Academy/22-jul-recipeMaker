@@ -22,3 +22,7 @@ body {
 .loginForm p {
     font-size: 0.9em;
 }
+
+.recipe {
+    background-color: #a8ebeb;
+}
