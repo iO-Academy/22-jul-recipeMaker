@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Abstracts\Controller;
+use App\CustomExceptions\InvalidEmailException;
 use App\Models\UserModel;
 use App\Sanitisers\UserSanitiser;
 use App\Validators\UserValidator;
@@ -34,15 +35,17 @@ class AcceptLoginController extends Controller
 
             if (UserValidator::validateEmail($userEmail['email'])) {
                 $userEmail = UserSanitiser::sanitiseEmail($userEmail['email']);
-                if (in_array($userEmail['email'], $currentUsers)) {
+                if (in_array($userEmail, $currentUsers)) {
                     $message = 'Successfully signed in';
                     $result = true;
                 } else {
                     $result = $this->userModel->addUser($userEmail);
                     $message = 'User added to DB';
                 }
+            } else {
+                throw new InvalidEmailException('This email is invalid');
             }
-        } catch (\Exception $exception) {
+        } catch (InvalidEmailException $exception) {
             $data['message'] = $exception->getMessage();
         }
 

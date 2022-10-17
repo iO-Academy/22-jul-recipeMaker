@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 use DI\ContainerBuilder;
@@ -34,7 +35,7 @@ return function (ContainerBuilder $containerBuilder) {
     };
 
     $container['db'] = function () {
-        $db = new \PDO('mysql:host=127.0.0.1: dbname=fishFood', 'root', 'password');
+        $db = new \PDO('mysql:host=127.0.0.1; dbname=fishFood', 'root', 'password');
         $db->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
         return $db;
     };
