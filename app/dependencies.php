@@ -42,9 +42,11 @@ return function (ContainerBuilder $containerBuilder) {
 
     // controllers
     $container['AcceptLoginController'] = DI\factory('\App\Factories\AcceptLoginControllerFactory');
+    $container['HomepageController'] = DI\factory('\App\Factories\HomepageControllerFactory');
 
     // models
     $container['UserModel'] = DI\factory('\App\Factories\UserModelFactory');
+    $container['RecipeModel'] = DI\factory('\App\Factories\RecipeModelFactory');
 
     $containerBuilder->addDefinitions($container);
 };
