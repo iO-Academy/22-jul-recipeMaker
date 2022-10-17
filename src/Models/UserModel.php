@@ -22,6 +22,18 @@ class UserModel
         return $query;
     }
 
+    public function getUserById(string $email)
+    {
+        $query = $this->db->prepare("
+            SELECT `id`, `email`
+                FROM `users`
+                    WHERE `email` = :email;
+        ");
+        $query->bindParam(':email', $email);
+        $query->execute();
+        return $query;
+    }
+
     public function getAllUsers()
     {
         $query = $this->db->prepare("
