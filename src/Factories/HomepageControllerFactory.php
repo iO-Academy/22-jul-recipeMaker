@@ -10,7 +10,7 @@ class HomepageControllerFactory
     public function __invoke(ContainerInterface $container): HomepageController
     {
         $renderer = $container->get('renderer');
-        $recipeModel = $container->get('RecipeModel');
-        return new HomepageController($recipeModel, $renderer);
+        // $recipeModel = $container->get('RecipeModel');
+        return new HomepageController($renderer);
     }
 }
