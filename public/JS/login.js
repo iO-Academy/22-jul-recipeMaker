@@ -3,6 +3,7 @@ const input = document.querySelector('#emailInput');
 const messageDisplay = document.querySelector('.loginMessage');
 button.addEventListener('click', (e) => {
     e.preventDefault();
+    messageDisplay.innerHTML = '';
     let email = input.value;
     if (isEmail(email)) {
         fetch('/login', {
@@ -20,6 +21,8 @@ button.addEventListener('click', (e) => {
                     let p_text = document.createTextNode('Something went wrong');
                     p_tag.appendChild(p_text);
                     messageDisplay.appendChild(p_text);
+                } else {
+                    window.location.href = "/";
                 }
             })
     } else {

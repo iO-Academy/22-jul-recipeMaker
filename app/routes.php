@@ -14,5 +14,4 @@ return function (App $app) {
 
     $app->get('/login', 'LoginController');
     $app->post('/login', 'AcceptLoginController');
-
 };
