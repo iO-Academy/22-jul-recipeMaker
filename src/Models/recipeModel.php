@@ -23,6 +23,7 @@ class RecipeModel
                     WHERE `email` = :email;
         ");
         $query->bindParam(':email', $email);
+        $query->setFetchMode(\PDO::FETCH_CLASS, RecipeEntity::class);
         $query->execute();
         return $query->fetchAll();
     }
