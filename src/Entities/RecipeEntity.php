@@ -9,8 +9,6 @@ class RecipeEntity
     private $cookTime;
     private $prepTime;
     private $instructions;
-    private $recipeId;
-    private $userId;
     private $email;
 
     /**
@@ -51,22 +49,6 @@ class RecipeEntity
     public function getInstructions()
     {
         return $this->instructions;
-    }
-
-    /**
-     * Get the value of recipeId
-     */
-    public function getRecipeId()
-    {
-        return $this->recipeId;
-    }
-
-    /**
-     * Get the value of userId
-     */
-    public function getUserId()
-    {
-        return $this->userId;
     }
 
     /**

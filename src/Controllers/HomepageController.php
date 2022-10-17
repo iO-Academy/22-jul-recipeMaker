@@ -24,9 +24,6 @@ class HomepageController extends Controller
         if ($_SESSION['loggedIn'] == true) {
             $userEmail = $_SESSION['user'];
             $userRecipes = $this->recipeModel->getUserRecipes($userEmail);
-            echo '<pre>';
-            var_dump($userRecipes);
-            echo '</pre>';
             $args['userRecipes'] = $userRecipes;
             return $this->renderer->render($response, 'home.phtml', $args);
         } else {
