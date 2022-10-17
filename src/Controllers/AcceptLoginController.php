@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Abstracts\Controller;
 use App\Models\UserModel;
+use App\Validators\UserValidator;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
 
@@ -19,7 +20,6 @@ class AcceptLoginController extends Controller
     public function __invoke(Request $request, Response $response, array $args)
     {
         $userEmail = $request->getParsedBody();
-        $this->userModel->addUser($userEmail['email']);
 
         $data = [
             'success' => false,
@@ -32,11 +32,12 @@ class AcceptLoginController extends Controller
             $currentUsers = $this->userModel->getAllUsers();
 
             // need to create these classes and functions
-            if (UserValidator::validate($userEmail)) {
+            if (UserValidator::validateEmail($userEmail['email'])) {
                 $userEmail = UserSanitiser::sanitise($userEmail);
                 if (in_array($userEmail['email'], $currentUsers)) {
                     // log user in
                     $message = 'Successfully signed in';
+                    $result = true;
                 } else {
                     $result = $this->userModel->addUser($userEmail);
                     // log user in
