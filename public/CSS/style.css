@@ -1,0 +1,24 @@
+* {
+	box-sizing: border-box;
+    font-family: georama;
+}
+
+nav {
+    background-color: #a8ebeb;
+}
+
+body {
+    margin: 0;
+    background-image: url('../resources/spoons.jpg');
+    background-size: cover;
+    height: 100vh;
+    background-position: center;
+}
+
+.loginForm {
+    background-color: #a8ebeb;
+}
+
+.loginForm p {
+    font-size: 0.9em;
+}
