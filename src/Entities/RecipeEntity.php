@@ -25,9 +25,8 @@ class RecipeEntity
    /**
     * Gets duration
     *
-    * @return integer
     */
-    public function getDuration(): int
+    public function getDuration()
     {
         return $this->duration;
     }
@@ -35,9 +34,8 @@ class RecipeEntity
     /**
      * Gets cook time 
      *
-     * @return integer
      */
-    public function getCookTime(): int
+    public function getCookTime()
     {
         return $this->cookTime;
     }
@@ -45,7 +43,7 @@ class RecipeEntity
     /**
      * Get the value of prepTime
      */
-    public function getPrepTime(): int
+    public function getPrepTime()
     {
         return $this->prepTime;
     }
