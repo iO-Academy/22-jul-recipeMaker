@@ -33,7 +33,7 @@ class RecipeViewHelperTest extends TestCase
         $this->assertEquals($expected, $result);
     }
 
-    public function testSuccessDisplayUserRecipesEmptyArray()
+    public function testFailureDisplayUserRecipesEmptyArray()
     {
         $expected = '<div class="col-12 col-lg-3 no-recipe m-3 p-3">';
         $expected .= '<h5 class="text-center">No recipes found.';
