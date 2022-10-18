@@ -32,8 +32,7 @@ class RecipeEntity
     }
 
     /**
-     * Gets cook time 
-     *
+     * Gets cook time
      */
     public function getCookTime()
     {

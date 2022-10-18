@@ -25,7 +25,6 @@ class HomepageController extends Controller
             $userEmail = $_SESSION['user'];
             $userRecipes = $this->recipeModel->getUserRecipes($userEmail);
             $args['userRecipes'] = $userRecipes;
-            $_SESSION['userId'] = $userRecipes[0]->getUserId();
             return $this->renderer->render($response, 'home.phtml', $args);
         } else {
             return $response->withHeader('Location', '/login');

@@ -11,6 +11,12 @@ class UserModel
         $this->db = $db;
     }
 
+    /**
+     * Adds user to database
+     *
+     * @param string $email
+     * @return boolean
+     */
     public function addUser(string $email): bool
     {
         $query = $this->db->prepare("
@@ -20,6 +26,23 @@ class UserModel
         $query->bindParam(':email', $email);
         $query->execute();
         return $query;
+    }
+    /**
+     * Gets current user's id from the database
+     *
+     * @param [string] $email
+     * @return integer
+     */
+    public function getCurrentUserId(string $email): int
+    {
+        $query = $this->db->prepare("
+        SELECT `id`
+        FROM `users`
+        WHERE `email` = :email;
+        ");
+        $query->bindParam(':email', $email);
+        $query->execute();
+        return $query->fetch();
     }
 
     public function getAllUsers(): array
