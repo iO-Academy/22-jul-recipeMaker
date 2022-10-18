@@ -27,22 +27,24 @@ const getFormData = () => {
 }
 
 const validateForm = (form) => {
-    let success = false
-    let message = ''
+    let success = true
     let inputs = document.querySelectorAll('.recipeInput');
-
     inputs.forEach(function (element) {
-        //Checks fields with attribute data-required=true has data
         let required = element.getAttribute('data-required')
         if (required && element.value.length < 1) {
-            message += element.previousElementSibling.innerHTML + ' is a required field! <br>';
+            element.nextElementSibling.innerHTML = element.previousElementSibling.innerHTML + ' is a required field! <br>';
+            success = false;
+        } else {
+            element.nextElementSibling.innerHTML = ''
+        }
+        let maxLength = element.getAttribute('data-max');
+        if (maxLength != null && element.value.length > maxLength) {
+            element.nextElementSibling.innerHTML = element.previousElementSibling.innerHTML + ' is too long, must be less than ' + maxLength + ' characters! <br>';
             success = false;
         }
-    // if(validateString(form.elements['recipeName'].value,)) {
-
-    // }
+        
+        console.log(success)
     })
-    document.getElementById('messages').innerHTML = message;
 }
 
 submitRecipeBtn.addEventListener('click', (e) => {
@@ -69,7 +71,7 @@ const setRequiredRecipeTimes = (form) => {
 }
 
 const validateString = (string) => {
-    let pattern = /^[a-z0-9 ,.'-]+$/i;
+    let pattern = /^[a-zA-Z0-9 ,.'-]+$/i;
     if(pattern.test(string) && string.length < 255) {
         return true
     } else {
@@ -79,18 +81,18 @@ const validateString = (string) => {
 
 const validateNum = (num) => {
     let pattern = /^[0-9]+$/i;
-    if(pattern.test(num) && num < 10000) {
+    if(pattern.test(num) && num < 1000000) {
         return true
     } else {
         return false
     }
 }
 
-const validateInstructions = (ins) => {
-    let pattern = /^[a-z0-9 ,.'-]+$/i;
-    if(pattern.test(ins) && string.length < 1000) {
-        return true
-    } else {
-        return false
-    }
-}
+// const validateInstructions = (ins) => {
+//     let pattern = /^[a-zA-Z0-9 ,.'-]+$/i;
+//     if(pattern.test(ins) && string.length < 5000) {
+//         return true
+//     } else {
+//         return false
+//     }
+// }
