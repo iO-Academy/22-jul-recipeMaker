@@ -25,7 +25,6 @@ const getFormData = () => {
         data.cookTime = newRecipeForm.elements['cookingTime'].value
         data.prepTime = newRecipeForm.elements['prepTime'].value
     }
-
     return data
 }
 

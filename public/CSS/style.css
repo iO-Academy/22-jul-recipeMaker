@@ -23,6 +23,10 @@ body {
     font-size: 0.9em;
 }
 
+.errorMessages {
+    color: rgb(199, 2, 2);
+}
+
 #addRecipeBtn {
     font-size: 2rem;
 }
