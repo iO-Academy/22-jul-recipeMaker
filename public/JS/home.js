@@ -68,8 +68,8 @@ const validateForm = (data) => {
         } else {
             alerts.textContent = ''
         }
-    return success
     }
+    return success
 }
 
 submitRecipeBtn.addEventListener('click', (e) => {
@@ -82,7 +82,6 @@ submitRecipeBtn.addEventListener('click', (e) => {
             data.prepTime = 'null'
             data.cookTime = 'null'
         }
-        console.log(data)
         fetch('/', {
             method: 'POST',
             body: JSON.stringify(data),
@@ -103,10 +102,9 @@ submitRecipeBtn.addEventListener('click', (e) => {
             }
         })
     } else {
-        let p_tag = document.createElement('p');
-        let p_text = document.createTextNode('Something went wrong');
-        p_tag.appendChild(p_text);
-        alerts.appendChild(p_text);
+        console.log('not valid')
+        let alerts = document.querySelector('#alerts')
+        alerts.textContent = 'Something went wrong'
     }
 })
 
