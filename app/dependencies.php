@@ -35,7 +35,7 @@ return function (ContainerBuilder $containerBuilder) {
     };
     $container['db'] = function () {
         $db = new \PDO('mysql:host=127.0.0.1; dbname=fishFood', 'root', 'password');
-        $db->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
+        $db->setAttribute(\PDO::ATTR_DEFAULT_FETCH_MODE, \PDO::FETCH_ASSOC);
         return $db;
     };
 
@@ -43,6 +43,7 @@ return function (ContainerBuilder $containerBuilder) {
     $container['AcceptLoginController'] = DI\factory('\App\Factories\AcceptLoginControllerFactory');
     $container['HomepageController'] = DI\factory('\App\Factories\HomepageControllerFactory');
     $container['LoginController'] = DI\factory('\App\Factories\LoginControllerFactory');
+    $container['AddRecipeController'] = DI\factory(('\App\Factories\AddRecipeControllerFactory'));
 
     // models
     $container['UserModel'] = DI\factory('\App\Factories\UserModelFactory');

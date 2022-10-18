@@ -7,7 +7,7 @@
 #
 # Host: 127.0.0.1 (MySQL 5.5.5-10.8.3-MariaDB-1:10.8.3+maria~jammy)
 # Database: fishFood
-# Generation Time: 2022-10-14 14:21:02 +0000
+# Generation Time: 2022-10-17 14:28:21 +0000
 # ************************************************************
 
 
@@ -48,6 +48,17 @@ CREATE TABLE `recipes` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+LOCK TABLES `recipes` WRITE;
+/*!40000 ALTER TABLE `recipes` DISABLE KEYS */;
+
+INSERT INTO `recipes` (`id`, `name`, `duration`, `cookTime`, `prepTime`, `instructions`)
+VALUES
+	(1,'Cheese on Toast',15,10,5,'Put cheese on some bread and toast it'),
+	(2,'Beans on Toast',20,15,5,'Microwave beans, toast some toast, put toast on the beans'),
+	(3,'Cheese on Beans on Toast',25,20,5,'Place the cheese in the toast, toast the beans and bread the toast');
+
+/*!40000 ALTER TABLE `recipes` ENABLE KEYS */;
+UNLOCK TABLES;
 
 
 # Dump of table recipes_ingredients
@@ -75,6 +86,17 @@ CREATE TABLE `users` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+LOCK TABLES `users` WRITE;
+/*!40000 ALTER TABLE `users` DISABLE KEYS */;
+
+INSERT INTO `users` (`id`, `email`)
+VALUES
+	(1,'chris@chris.com'),
+	(2,'mike@key.com'),
+	(3,'aid@dan.com');
+
+/*!40000 ALTER TABLE `users` ENABLE KEYS */;
+UNLOCK TABLES;
 
 
 # Dump of table users_recipes
@@ -89,6 +111,21 @@ CREATE TABLE `users_recipes` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+LOCK TABLES `users_recipes` WRITE;
+/*!40000 ALTER TABLE `users_recipes` DISABLE KEYS */;
+
+INSERT INTO `users_recipes` (`id`, `userId`, `recipeId`)
+VALUES
+	(1,1,1),
+	(2,1,2),
+	(3,1,3),
+	(4,2,3),
+	(5,2,1),
+	(6,3,2),
+	(7,3,1);
+
+/*!40000 ALTER TABLE `users_recipes` ENABLE KEYS */;
+UNLOCK TABLES;
 
 
 

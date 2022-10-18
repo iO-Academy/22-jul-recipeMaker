@@ -1,6 +1,6 @@
 * {
 	box-sizing: border-box;
-    font-family: georama;
+    font-family: 'Georama', sans-serif;
 }
 
 nav {
@@ -41,3 +41,41 @@ body {
 .cookingTimes {
     background-color: #a8ebeb;
 }
+
+.recipe {
+    background-color: #a8ebeb;
+}
+
+.no-recipe {
+    background-color: #d9f3f3;
+}
+
+.recipe-content {
+    background-color: #d9f3f3;
+}
+
+.recipe-name {
+    font-size: 1.2rem;
+}
+
+.recipe-duration {
+    font-size: 1rem;
+}
+
+.recipe-button {
+    display: inline-block;
+    height: 2rem;
+    width: 2rem;
+    font-size: 1.2rem;
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 4px;
+}
+
+.recipe-button:hover {
+    background-color: #4d9e51;
+}
+
