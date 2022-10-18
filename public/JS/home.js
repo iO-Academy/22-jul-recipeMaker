@@ -64,14 +64,15 @@ const validateForm = (data) => {
         }
     })
     let durationAlerts = document.querySelector('#durationAlerts')
-    if (data.prepTime && data.cookTime) {
+    if (data.prepTime && data.cookTime && data.duration !== '') {
         if (parseInt(data.duration) != parseInt(data.prepTime) + parseInt(data.cookTime)) {
             success = false
             durationAlerts.textContent = 'Duration must equal cooking time + prep time!'
-            console.log(alerts.textContent)
         } else {
             alerts.textContent = ''
         }
+    } else if (data.prepTime && data.cookTime && data.duration == '') {
+        data.duration = parseInt(data.prepTime) + parseInt(data.cookTime)
     }
     return success
 }
@@ -93,10 +94,8 @@ submitRecipeBtn.addEventListener('click', (e) => {
         .then((response) => {
             console.log(response)
             if (!response.success) {
-                let p_tag = document.createElement('p');
-                let p_text = document.createTextNode('Something went wrong');
-                p_tag.appendChild(p_text);
-                alerts.appendChild(p_text);
+                let alerts = document.querySelector('#alerts')
+                alerts.textContent = 'Something went wrong'
             } else {
                 window.location.href = "/";
             }
