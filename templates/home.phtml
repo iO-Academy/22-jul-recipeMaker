@@ -6,8 +6,9 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"/>
     <link rel="stylesheet" type="text/css" href="/CSS/style.css"/>
-    <link rel="stylesheet"
-          href="https://fonts.googleapis.com/css2?family=Georama">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Georama:wght@400;700&display=swap" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 </head>
@@ -16,7 +17,7 @@
         <h1 class="col-12 text-center my-3">Fish Food</h1>
     </nav>
     <main class="container-fluid">
-        <div class="row">
+        <div class="row justify-content-center m-1">
             <?= \App\ViewHelpers\RecipeViewhelper::displayUserRecipes($userRecipes) ?>
         </div>
     </main>

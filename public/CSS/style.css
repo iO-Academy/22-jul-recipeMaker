@@ -1,6 +1,6 @@
 * {
 	box-sizing: border-box;
-    font-family: georama;
+    font-family: 'Georama', sans-serif;
 }
 
 nav {
@@ -29,4 +29,18 @@ body {
 
 .recipe-content {
     background-color: #d9f3f3;
+}
+
+.recipe-name {
+    font-size: 1.2rem;
+}
+
+.recipe-duration {
+    font-size: 1rem;
+}
+
+.recipe-button {
+    display: inline-block;
+    height: 2rem;
+    width: 2rem;
 }
