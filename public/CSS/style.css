@@ -24,7 +24,8 @@ body {
 }
 
 .recipe {
-    background-color: #a8ebeb;
+    /* background-color: #a8ebeb; */
+
 }
 
 .no-recipe {
@@ -33,6 +34,15 @@ body {
 
 .recipe-content {
     background-color: #d9f3f3;
+    padding: 0 18px;
+    display: none;
+    overflow: hidden;
+}
+
+.recipe-header {
+    background-color: #a8ebeb;
+    padding: 10px;
+    min-height: 70px;
 }
 
 .recipe-name {

@@ -47,10 +47,6 @@ class AddRecipeController extends Controller
         } catch (InvalidRecipeException $exception) {
             $data['message'] = $exception->getMessage();
         }
-
-        echo '<pre>';
-        var_dump($result);
-        echo '</pre>';
         if (isset($result) && $result) {
             $data = [
                 'success' => true,
