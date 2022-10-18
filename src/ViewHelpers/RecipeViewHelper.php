@@ -13,11 +13,14 @@ class RecipeViewhelper
             $result .= '<h2 class="my-auto recipe-name">' . $userRecipe->getName() . '</h2>';
             $result .= '<div class="d-flex"><h3 class="my-auto recipe-duration mx-1">';
             $result .= $userRecipe->getDuration() . ' mins</h3>';
-            $result .= '<button class="btn-success recipe-button">+</button></div></div>';
+            $result .= '<button class="recipe-button">+</button></div></div>';
             $result .= '<div class="recipe-content">';
             $result .= '<div class="d-flex justify-content-between">';
-            $result .= '<p class="m-1">Cooking time: ' . $userRecipe->getCookTime() . ' mins</p>';
-            $result .= '<p class="m-1">Preparation time: ' . $userRecipe->getPrepTime() . ' mins</p></div>';
+            $result .= $userRecipe->getCookTime() == null ?
+                '' : '<p class="m-1">Cooking time: ' . $userRecipe->getCookTime() . ' mins</p>';
+            $result .= $userRecipe->getPrepTime() == null ?
+                '' : '<p class="m-1">Preparation time: ' . $userRecipe->getPrepTime() . ' mins</p>';
+            $result .= '</div>';
             $result .= '<p class="font-weight-bold m-1">Instructions: </p>';
             $result .= '<p class="m-0 p-1">' . $userRecipe->getInstructions() . '</p>';
             $result .= '</div></div>';
