@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Entities\RecipeEntity;
+
 class RecipeModel
 {
     private $db;
@@ -14,7 +16,7 @@ class RecipeModel
     public function getUserRecipes($email)
     {
         $query = $this->db->prepare("
-        SELECT `name`, `duration`, `cookTime`, `prepTime`, `instructions`, `recipeId`, `userId`, `email`
+        SELECT `name`, `duration`, `cookTime`, `prepTime`, `instructions`, `email`
                 FROM `recipes`
                 LEFT JOIN `users_recipes`
                     ON `recipes`.`id` = `users_recipes`.`recipeId`
