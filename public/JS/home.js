@@ -18,10 +18,14 @@ const getFormData = () => {
     let data = {
         name: newRecipeForm.elements['recipeName'].value,
         duration: newRecipeForm.elements['duration'].value,
-        cookTime: newRecipeForm.elements['cookingTime'].value,
-        prepTime: newRecipeForm.elements['prepTime'].value,
         instructions: newRecipeForm.elements['instructions'].value
     }
+    if(newRecipeForm.elements['cookingTime'].value !== '' && 
+        newRecipeForm.elements['prepTime'].value !== '') {
+        data.cookTime = newRecipeForm.elements['cookingTime'].value
+        data.prepTime = newRecipeForm.elements['prepTime'].value
+    }
+
     return data
 }
 
@@ -78,11 +82,6 @@ submitRecipeBtn.addEventListener('click', (e) => {
     setRequiredRecipeTimes(data)
     let validate = validateForm(data)
     if (validate) {
-        if (data.prepTime === '' || data.cookTime === '') {
-            data.prepTime = null
-            data.cookTime = null
-        }
-        console.log(data)
         fetch('/', {
             method: 'POST',
             body: JSON.stringify(data),
@@ -99,11 +98,10 @@ submitRecipeBtn.addEventListener('click', (e) => {
                 p_tag.appendChild(p_text);
                 alerts.appendChild(p_text);
             } else {
-                // window.location.href = "/";
+                window.location.href = "/";
             }
         })
     } else {
-        console.log('not valid')
         let alerts = document.querySelector('#alerts')
         alerts.textContent = 'Something went wrong'
     }

@@ -18,10 +18,10 @@ class RecipeValidator
         try {
             self::validateRecipe($recipe['name'], 100);
             self::validateRecipe($recipe['duration'], 10);
-            if ($recipe['cookTime'] !== null) {
+            if (isset($recipe['cookTime'])) {
                 self::validateRecipe($recipe['cookTime'], 10);
             }
-            if ($recipe['prepTime'] !== null) {
+            if (isset($recipe['prepTime'])) {
                 self::validateRecipe($recipe['prepTime'], 10);
             }
             self::validateRecipe($recipe['instructions'], 10000);
