@@ -38,8 +38,16 @@ const validateForm = (form) => {
             element.nextElementSibling.innerHTML = ''
         }
 
+        if (element.className === 'recipeInput strInput') {
+            if (validateString(element.value) === false) {
+                element.nextElementSibling.innerHTML = element.previousElementSibling.innerHTML + ' must be a valid name <br>';
+                success = false
+            }
+        }
+        
         if (required && element.className === 'recipeInput numInput') {
             if (validateNum(element.value) === false) {
+                element.nextElementSibling.innerHTML = element.previousElementSibling.innerHTML + ' must be a valid number <br>';
                 success = false
             }
         }
