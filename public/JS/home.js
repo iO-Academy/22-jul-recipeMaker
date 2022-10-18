@@ -92,7 +92,6 @@ submitRecipeBtn.addEventListener('click', (e) => {
         })
         .then(data => data.json())
         .then((response) => {
-            console.log(response)
             if (!response.success) {
                 let alerts = document.querySelector('#alerts')
                 alerts.textContent = 'Something went wrong'
@@ -102,7 +101,7 @@ submitRecipeBtn.addEventListener('click', (e) => {
         })
     } else {
         let alerts = document.querySelector('#alerts')
-        alerts.textContent = 'Something went wrong'
+        alerts.textContent = 'Please fix the above error'
     }
 })
 
