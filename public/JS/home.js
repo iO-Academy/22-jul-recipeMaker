@@ -37,13 +37,20 @@ const validateForm = (form) => {
         } else {
             element.nextElementSibling.innerHTML = ''
         }
-        let maxLength = element.getAttribute('data-max');
-        if (maxLength != null && element.value.length > maxLength) {
-            element.nextElementSibling.innerHTML = element.previousElementSibling.innerHTML + ' is too long, must be less than ' + maxLength + ' characters! <br>';
-            success = false;
+
+        if (required && element.className === 'recipeInput numInput') {
+            if (validateNum(element.value) === false) {
+                success = false
+            }
         }
-        
-        console.log(success)
+
+        if (element.className === "recipeInput insInput") {
+            let maxLength = element.getAttribute('data-max');
+            if (maxLength != null && element.value.length > maxLength) {
+                element.nextElementSibling.innerHTML = element.previousElementSibling.innerHTML + ' is too long, must be less than ' + maxLength + ' characters! <br>';
+                success = false;
+            }
+        }
     })
 }
 
@@ -81,18 +88,10 @@ const validateString = (string) => {
 
 const validateNum = (num) => {
     let pattern = /^[0-9]+$/i;
-    if(pattern.test(num) && num < 1000000) {
+    if(pattern.test(num) && num.length < 10) {
         return true
     } else {
         return false
     }
 }
 
-// const validateInstructions = (ins) => {
-//     let pattern = /^[a-zA-Z0-9 ,.'-]+$/i;
-//     if(pattern.test(ins) && string.length < 5000) {
-//         return true
-//     } else {
-//         return false
-//     }
-// }
