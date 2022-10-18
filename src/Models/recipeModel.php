@@ -11,13 +11,13 @@ class RecipeModel
         $this->db = $db;
     }
 
-    public function addNewRecipe(
-        $name,
-        $duration,
-        $cookTime,
-        $prepTime,
-        $instructions
-    ) {
+    public function getLastRecipeId()
+    {
+        return $this->db->lastInsertId();
+    }
+
+    public function addNewRecipe(array $recipe): bool
+    {
         $query = $this->db->prepare("
         INSERT INTO `recipes` (
             `name`, 
@@ -31,15 +31,29 @@ class RecipeModel
             :cookTime, 
             :prepTime, 
             :instructions");
-        $query->bindParam(':name', $name);
-        $query->bindParam(':duration', $duration);
-        $query->bindParam(':cookTime', $cookTime);
-        $query->bindParam(':prepTime', $prepTime);
-        $query->bindParam(':instructions', $instructions);
+        $query->bindParam(':name', $recipe['name']);
+        $query->bindParam(':duration', $recipe['duration']);
+        $query->bindParam(':cookTime', $recipe['cookTime']);
+        $query->bindParam(':prepTime', $recipe['prepTime']);
+        $query->bindParam(':instructions', $recipe['instructions']);
         return $query->execute();
     }
 
-    public function getUserRecipes($email)
+    public function linkRecipeToUser(int $userId, int $recipeId): bool
+    {
+        $query = $this->db->prepare("
+        INSERT INTO `users_recipes` (
+            `userId`,
+            `recipeId`)
+        VALUES (
+            :userId,
+            :recipeId");
+        $query->bindParam(':userId', $userId);
+        $query->bindParam(':recipeId', $recipeId);
+        return $query->execute;
+    }
+
+    public function getUserRecipes(string $email): array
     {
         $query = $this->db->prepare("
         SELECT `name`, `duration`, `cookTime`, `prepTime`, `instructions`, `recipeId`, `userId`, `email`
