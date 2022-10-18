@@ -7,8 +7,8 @@ use App\CustomExceptions\InvalidRecipeException;
 use App\Models\RecipeModel;
 use App\Sanitisers\RecipeSanitiser;
 use App\Validators\RecipeValidator;
-use Slim\Psr7\Request;
-use Slim\Psr7\Response;
+use Psr\Http\Message\ServerRequestInterface as Request;
+use Psr\Http\Message\ResponseInterface as Response;
 
 class AddRecipeController extends Controller
 {
@@ -32,8 +32,14 @@ class AddRecipeController extends Controller
 
         try {
             RecipeValidator::validateRecipeForm($recipe);
-            $vaildatedRecipe = RecipeSanitiser::sanitiseNewRecipe($recipe);
-            $this->recipeModel->addNewRecipe($vaildatedRecipe);
+            $validatedRecipe = RecipeSanitiser::sanitiseNewRecipe($recipe);
+            $this->recipeModel->addNewRecipe(
+                $validatedRecipe['name'],
+                $validatedRecipe['duration'],
+                $validatedRecipe['cookTime'],
+                $validatedRecipe['prepTime'],
+                $validatedRecipe['instructions']
+            );
             $recipeId = $this->recipeModel->getLastRecipeId();
             $userId = $_SESSION['userId'];
             $result = $this->recipeModel->linkRecipeToUser($userId, $recipeId);
@@ -42,6 +48,9 @@ class AddRecipeController extends Controller
             $data['message'] = $exception->getMessage();
         }
 
+        echo '<pre>';
+        var_dump($result);
+        echo '</pre>';
         if (isset($result) && $result) {
             $data = [
                 'success' => true,
