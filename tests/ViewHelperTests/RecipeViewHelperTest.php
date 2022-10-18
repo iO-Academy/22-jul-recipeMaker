@@ -41,4 +41,11 @@ class RecipeViewHelperTest extends TestCase
         $result = RecipeViewhelper::displayUserRecipes([]);
         $this->assertEquals($expected, $result);
     }
+
+    public function testMalformedDisplayUserRecipes()
+    {
+        $input = '';
+        $this->expectException(\Error::class);
+        $actual = RecipeViewhelper::displayUserRecipes($input);
+    }
 }
