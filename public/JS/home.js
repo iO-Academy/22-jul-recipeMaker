@@ -59,7 +59,7 @@ const validateForm = (data) => {
             }
         }
     })
-    let durationAlerts = document.querySelector('#alerts')
+    let durationAlerts = document.querySelector('#durationAlerts')
     if (data.prepTime && data.cookTime) {
         if (parseInt(data.duration) != parseInt(data.prepTime) + parseInt(data.cookTime)) {
             success = false
@@ -79,9 +79,10 @@ submitRecipeBtn.addEventListener('click', (e) => {
     let validate = validateForm(data)
     if (validate) {
         if (data.prepTime === '' || data.cookTime === '') {
-            data.prepTime = 'null'
-            data.cookTime = 'null'
+            data.prepTime = null
+            data.cookTime = null
         }
+        console.log(data)
         fetch('/', {
             method: 'POST',
             body: JSON.stringify(data),
@@ -98,7 +99,7 @@ submitRecipeBtn.addEventListener('click', (e) => {
                 p_tag.appendChild(p_text);
                 alerts.appendChild(p_text);
             } else {
-                window.location.href = "/";
+                // window.location.href = "/";
             }
         })
     } else {
