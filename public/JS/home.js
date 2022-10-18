@@ -27,13 +27,27 @@ const getFormData = () => {
 }
 
 const validateForm = (form) => {
-    let success = false;
-    
+    let success = false
+    let message = ''
+    let inputs = document.querySelectorAll('.recipeInput');
+    inputs.forEach(function (element) {
+        //Checks fields with attribute data-required=true has data
+        let required = element.getAttribute('data-required')
+        if (required && element.value.length < 1) {
+            message += element.previousElementSibling.innerHTML + ' is a required field! <br>';
+            success = false;
+        }
+    // if(validateString(form.elements['recipeName'].value,)) {
+
+    // }
+    })
+    document.getElementById('messages').innerHTML = message;
 }
 
 submitRecipeBtn.addEventListener('click', (e) => {
     e.preventDefault()
     let data = getFormData()
+    validateForm(data)
 
     //validate & sanitise
 
