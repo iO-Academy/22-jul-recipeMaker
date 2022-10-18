@@ -54,10 +54,6 @@ class AcceptLoginController extends Controller
                     $_SESSION['loggedIn'] = true;
                     $_SESSION['user'] = $validatedEmail;
                     $_SESSION['userId'] = $this->userModel->getCurrentUserId($validatedEmail);
-                    // $currentid = $this->userModel->getCurrentUserId($validatedEmail);
-                    // echo '<pre>';
-                    // var_dump($currentid);
-                    // echo '</pre>';
                 }
             } else {
                 throw new InvalidEmailException('This email is invalid');
