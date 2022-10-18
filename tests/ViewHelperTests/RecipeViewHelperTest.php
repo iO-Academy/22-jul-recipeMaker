@@ -35,6 +35,10 @@ class RecipeViewHelperTest extends TestCase
 
     public function testSuccessDisplayUserRecipesEmptyArray()
     {
-        
+        $expected = '<div class="col-12 col-lg-3 no-recipe m-3 p-3">';
+        $expected .= '<h5 class="text-center">No recipes found.';
+        $expected .= '<br>Click the \'+\' in the top right to get started!</h5></div>';
+        $result = RecipeViewhelper::displayUserRecipes([]);
+        $this->assertEquals($expected, $result);
     }
 }
