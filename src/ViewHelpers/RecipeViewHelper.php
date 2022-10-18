@@ -15,7 +15,7 @@ class RecipeViewhelper
         $result = '';
         foreach ($userRecipes as $userRecipe) {
             $result .= '<div class="col-12 col-lg-3 recipe m-3 p-0">';
-            $result .= '<div class="d-flex align-items-center m-2 justify-content-between">';
+            $result .= '<div class="recipe-header d-flex align-items-center justify-content-between">';
             $result .= '<h2 class="my-auto recipe-name">' . $userRecipe->getName() . '</h2>';
             $result .= '<div class="d-flex"><h3 class="my-auto recipe-duration mx-1">';
             $result .= $userRecipe->getDuration() . ' mins</h3>';

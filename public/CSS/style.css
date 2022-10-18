@@ -23,16 +23,21 @@ body {
     font-size: 0.9em;
 }
 
-.recipe {
-    background-color: #a8ebeb;
-}
-
 .no-recipe {
     background-color: #d9f3f3;
 }
 
 .recipe-content {
     background-color: #d9f3f3;
+    padding: 0 18px;
+    display: none;
+    overflow: hidden;
+}
+
+.recipe-header {
+    background-color: #a8ebeb;
+    padding: 10px;
+    min-height: 70px;
 }
 
 .recipe-name {
