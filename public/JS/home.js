@@ -12,14 +12,13 @@ addRecipeBtn.addEventListener('click', (e) => {
         addRecipeAccordion.style.maxHeight = addRecipeAccordion.scrollHeight + "px";
         e.currentTarget.textContent = "-"
       }
-});
+})
 
 const getFormData = () => {
     let data = {
-        recipeName: newRecipeForm.elements['recipeName'].value,
+        name: newRecipeForm.elements['recipeName'].value,
         duration: newRecipeForm.elements['duration'].value,
-        prepTime: newRecipeForm.elements['prepTime'].value,
-        cookingTime: newRecipeForm.elements['cookingTime'].value,
+        cookTime: newRecipeForm.elements['cookingTime'].value,
         prepTime: newRecipeForm.elements['prepTime'].value,
         instructions: newRecipeForm.elements['instructions'].value
     }
@@ -60,11 +59,11 @@ const validateForm = (data) => {
             }
         }
     })
-    let alerts = document.querySelector('#alerts')
-    if (data.prepTime && data.cookingTime) {
-        if (parseInt(data.duration) != parseInt(data.prepTime) + parseInt(data.cookingTime)) {
+    let durationAlerts = document.querySelector('#alerts')
+    if (data.prepTime && data.cookTime) {
+        if (parseInt(data.duration) != parseInt(data.prepTime) + parseInt(data.cookTime)) {
             success = false
-            alerts.textContent = 'Duration must equal cooking time + prep time!'
+            durationAlerts.textContent = 'Duration must equal cooking time + prep time!'
             console.log(alerts.textContent)
         } else {
             alerts.textContent = ''
@@ -79,9 +78,9 @@ submitRecipeBtn.addEventListener('click', (e) => {
     setRequiredRecipeTimes(data)
     let validate = validateForm(data)
     if (validate) {
-        if (data.prepTime === '' || data.cookingTime === '') {
+        if (data.prepTime === '' || data.cookTime === '') {
             data.prepTime = 'null'
-            data.cookingTime = 'null'
+            data.cookTime = 'null'
         }
         fetch('/', {
             method: 'POST',
@@ -111,11 +110,11 @@ submitRecipeBtn.addEventListener('click', (e) => {
 })
 
 const setRequiredRecipeTimes = (form) => {
-    if(form.prepTime || form.cookingTime) {
+    if(form.prepTime || form.cookTime) {
         newRecipeForm.elements['prepTime'].setAttribute('data-required', 'true')
-        newRecipeForm.elements['cookingTime'].setAttribute('data-required', 'true')
+        newRecipeForm.elements['cookTime'].setAttribute('data-required', 'true')
         newRecipeForm.elements['duration'].removeAttribute('data-required')
-    } else if (!form.prepTime && !form.cookingTime) {
+    } else if (!form.prepTime && !form.cookTime) {
         newRecipeForm.elements['duration'].setAttribute('data-required', 'true')
         newRecipeForm.elements['prepTime'].removeAttribute('data-required')
         newRecipeForm.elements['cookingTime'].removeAttribute('data-required')
@@ -139,12 +138,3 @@ const validateNum = (num) => {
         return false
     }
 }
-
-// const cookingTimesFormatter = (dur, prep, cook) => {
-//     if (prep && cook) {
-//         dur = prep + cook
-//     } else {
-//         prep = 0
-//         cook = 0
-//     }
-// }
