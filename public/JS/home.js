@@ -26,7 +26,7 @@ const getFormData = () => {
     return data
 }
 
-const validateForm = (form) => {
+const validateForm = (data) => {
     let success = true
     let inputs = document.querySelectorAll('.recipeInput');
     inputs.forEach(function (element) {
@@ -60,6 +60,17 @@ const validateForm = (form) => {
             }
         }
     })
+    let alerts = document.querySelector('#alerts')
+    if (data.prepTime && data.cookingTime) {
+        if (parseInt(data.duration) != parseInt(data.prepTime) + parseInt(data.cookingTime)) {
+            success = false
+            alerts.textContent = 'Duration must equal cooking time + prep time!'
+            console.log(alerts.textContent)
+        } else {
+            alerts.textContent = ''
+        }
+    return success
+    }
 }
 
 submitRecipeBtn.addEventListener('click', (e) => {
@@ -67,10 +78,15 @@ submitRecipeBtn.addEventListener('click', (e) => {
     let data = getFormData()
     setRequiredRecipeTimes(data)
     validateForm(data)
-
-    //validate & sanitise
-
-    //insert fetch request
+    // if (validate) {
+    //     if (data.prepTime && data.cookingTime) {
+    //         data.duration = parseInt(data.prepTime) + parseInt(data.cookingTime)
+    //     } else {
+    //         data.prepTime = 'null'
+    //         data.cookingTime = 'null'
+    //     }
+    // }
+    // insert fetch request
 })
 
 const setRequiredRecipeTimes = (form) => {
@@ -103,3 +119,11 @@ const validateNum = (num) => {
     }
 }
 
+// const cookingTimesFormatter = (dur, prep, cook) => {
+//     if (prep && cook) {
+//         dur = prep + cook
+//     } else {
+//         prep = 0
+//         cook = 0
+//     }
+// }
