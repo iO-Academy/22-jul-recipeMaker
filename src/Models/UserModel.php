@@ -11,7 +11,7 @@ class UserModel
         $this->db = $db;
     }
 
-    public function addUser(string $email)
+    public function addUser(string $email): bool
     {
         $query = $this->db->prepare("
             INSERT INTO `users` (`email`)
@@ -22,7 +22,7 @@ class UserModel
         return $query;
     }
 
-    public function getAllUsers()
+    public function getAllUsers(): array
     {
         $query = $this->db->prepare("
             SELECT `id`, `email`

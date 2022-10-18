@@ -11,11 +11,26 @@ class RecipeModel
         $this->db = $db;
     }
 
-    public function getLastRecipeId()
+    /**
+     * Fetches last inserted recipe id
+     *
+     * @return string
+     */
+    public function getLastRecipeId(): string
     {
         return $this->db->lastInsertId();
     }
 
+    /**
+     * Inserts new recipe into DB
+     *
+     * @param [string] $name
+     * @param [int] $duration
+     * @param [int || null] $cookTime
+     * @param [int || null] $prepTime
+     * @param [string] $instructions
+     * @return boolean
+     */
     public function addNewRecipe(
         $name,
         $duration,
@@ -44,6 +59,13 @@ class RecipeModel
         return $query->execute();
     }
 
+    /**
+     * Insert userid and recipeid to link table
+     *
+     * @param integer $userId
+     * @param integer $recipeId
+     * @return boolean
+     */
     public function linkRecipeToUser(int $userId, int $recipeId): bool
     {
         $query = $this->db->prepare("

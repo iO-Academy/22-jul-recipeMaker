@@ -7,6 +7,12 @@ use Exception;
 
 class RecipeValidator
 {
+    /**
+     * Validates all fields from the add recipe form
+     *
+     * @param array $recipe
+     * @return boolean
+     */
     public static function validateRecipeForm(array $recipe): bool
     {
         try {
@@ -25,6 +31,13 @@ class RecipeValidator
         }
     }
 
+    /**
+     * Validates individual recipe form field
+     *
+     * @param string $recipeField
+     * @param integer $length
+     * @return InvalidRecipeException
+     */
     private static function validateRecipe(string $recipeField, int $length)
     {
         if (empty($name) && strlen($recipeField) > $length) {

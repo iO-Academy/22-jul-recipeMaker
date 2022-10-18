@@ -7,6 +7,12 @@ use Exception;
 
 class RecipeSanitiser
 {
+    /**
+     * Sanitises add new recipe form
+     *
+     * @param array $recipe
+     * @return array or exception
+     */
     public static function sanitiseNewRecipe(array $recipe)
     {
         try {
