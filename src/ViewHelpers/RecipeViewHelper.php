@@ -4,7 +4,13 @@ namespace App\ViewHelpers;
 
 class RecipeViewhelper
 {
-    public static function displayUserRecipes($userRecipes)
+    /**
+     * Displays the user's recipes
+     *
+     * @param array $userRecipes
+     * @return string
+     */
+    public static function displayUserRecipes(array $userRecipes): string
     {
         $result = '';
         foreach ($userRecipes as $userRecipe) {
@@ -25,6 +31,23 @@ class RecipeViewhelper
             $result .= '<p class="m-0 p-1">' . $userRecipe->getInstructions() . '</p>';
             $result .= '</div></div>';
         }
-        return $result;
+        return self::handleNoRecipes($result);
+    }
+
+    /**
+     * If no recipes found, returns message saying no recipes found.
+     *
+     * @param string $output
+     *
+     * @return string
+     */
+    private static function handleNoRecipes(string $output): string
+    {
+        if (empty($output)) {
+            $result = '<div class="col-12 col-lg-3 no-recipe m-3 p-3"><h5 class="text-center">No recipes found.<br>';
+            $result .= 'Click the \'+\' in the top right to get started!</h5></div>';
+            return $result;
+        }
+        return $output;
     }
 }

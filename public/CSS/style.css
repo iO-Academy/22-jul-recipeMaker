@@ -27,6 +27,10 @@ body {
     background-color: #a8ebeb;
 }
 
+.no-recipe {
+    background-color: #d9f3f3;
+}
+
 .recipe-content {
     background-color: #d9f3f3;
 }
@@ -54,4 +58,4 @@ body {
 
 .recipe-button:hover {
     background-color: #4d9e51;
-  }
+}
