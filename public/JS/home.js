@@ -82,6 +82,7 @@ submitRecipeBtn.addEventListener('click', (e) => {
             data.prepTime = 'null'
             data.cookTime = 'null'
         }
+        console.log(data)
         fetch('/', {
             method: 'POST',
             body: JSON.stringify(data),
@@ -89,18 +90,18 @@ submitRecipeBtn.addEventListener('click', (e) => {
                 'content-type': 'application/json'
             }
         })
-            .then(data => data.json())
-            .then((response) => {
-                console.log(response)
-                if (!response.success) {
-                    let p_tag = document.createElement('p');
-                    let p_text = document.createTextNode('Something went wrong');
-                    p_tag.appendChild(p_text);
-                    alerts.appendChild(p_text);
-                } else {
-                    window.location.href = "/";
-                }
-            })
+        .then(data => data.json())
+        .then((response) => {
+            console.log(response)
+            if (!response.success) {
+                let p_tag = document.createElement('p');
+                let p_text = document.createTextNode('Something went wrong');
+                p_tag.appendChild(p_text);
+                alerts.appendChild(p_text);
+            } else {
+                window.location.href = "/";
+            }
+        })
     } else {
         let p_tag = document.createElement('p');
         let p_text = document.createTextNode('Something went wrong');
@@ -112,7 +113,7 @@ submitRecipeBtn.addEventListener('click', (e) => {
 const setRequiredRecipeTimes = (form) => {
     if(form.prepTime || form.cookTime) {
         newRecipeForm.elements['prepTime'].setAttribute('data-required', 'true')
-        newRecipeForm.elements['cookTime'].setAttribute('data-required', 'true')
+        newRecipeForm.elements['cookingTime'].setAttribute('data-required', 'true')
         newRecipeForm.elements['duration'].removeAttribute('data-required')
     } else if (!form.prepTime && !form.cookTime) {
         newRecipeForm.elements['duration'].setAttribute('data-required', 'true')

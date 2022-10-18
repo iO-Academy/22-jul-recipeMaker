@@ -48,9 +48,6 @@ class AddRecipeController extends Controller
             $data['message'] = $exception->getMessage();
         }
 
-        echo '<pre>';
-        var_dump($result);
-        echo '</pre>';
         if (isset($result) && $result) {
             $data = [
                 'success' => true,
