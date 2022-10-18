@@ -42,7 +42,8 @@ class UserModel
         ");
         $query->bindParam(':email', $email);
         $query->execute();
-        return $query->fetch();
+        $result = $query->fetch();
+        return $result['id'];
     }
 
     public function getAllUsers(): array
