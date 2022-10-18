@@ -30,6 +30,7 @@ const validateForm = (form) => {
     let success = false
     let message = ''
     let inputs = document.querySelectorAll('.recipeInput');
+
     inputs.forEach(function (element) {
         //Checks fields with attribute data-required=true has data
         let required = element.getAttribute('data-required')
@@ -47,12 +48,25 @@ const validateForm = (form) => {
 submitRecipeBtn.addEventListener('click', (e) => {
     e.preventDefault()
     let data = getFormData()
+    setRequiredRecipeTimes(data)
     validateForm(data)
 
     //validate & sanitise
 
     //insert fetch request
 })
+
+const setRequiredRecipeTimes = (form) => {
+    if(form.prepTime || form.cookingTime) {
+        newRecipeForm.elements['prepTime'].setAttribute('data-required', 'true')
+        newRecipeForm.elements['cookingTime'].setAttribute('data-required', 'true')
+        newRecipeForm.elements['duration'].removeAttribute('data-required')
+    } else if (!form.prepTime && !form.cookingTime) {
+        newRecipeForm.elements['duration'].setAttribute('data-required', 'true')
+        newRecipeForm.elements['prepTime'].removeAttribute('data-required')
+        newRecipeForm.elements['cookingTime'].removeAttribute('data-required')
+    }
+}
 
 const validateString = (string) => {
     let pattern = /^[a-z0-9 ,.'-]+$/i;
