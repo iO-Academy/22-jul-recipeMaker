@@ -10,25 +10,29 @@ class RecipeEntity
     private $prepTime;
     private $instructions;
     private $email;
+    private $userId;
 
-    /**
-     * Get the value of name
-     */
-    public function getName()
+   /**
+    * Get name
+    *
+    * @return string
+    */
+    public function getName(): string
     {
         return $this->name;
     }
 
-    /**
-     * Get the value of duration
-     */
+   /**
+    * Gets duration
+    *
+    */
     public function getDuration()
     {
         return $this->duration;
     }
 
     /**
-     * Get the value of cookTime
+     * Gets cook time
      */
     public function getCookTime()
     {
@@ -44,18 +48,32 @@ class RecipeEntity
     }
 
     /**
-     * Get the value of instructions
+     * Gets instructions
+     *
+     * @return string
      */
-    public function getInstructions()
+    public function getInstructions(): string
     {
         return $this->instructions;
     }
 
     /**
-     * Get the value of email
-     */
-    public function getEmail()
+     * Gets email
+     *
+     * @return string
+     */ 
+    public function getEmail(): string
     {
         return $this->email;
+    }
+
+    /**
+     * Gets id of current user
+     *
+     * @return integer
+     */
+    public function getUserId(): int
+    {
+        return $this->userId;
     }
 }
