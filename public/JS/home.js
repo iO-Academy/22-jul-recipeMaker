@@ -77,16 +77,37 @@ submitRecipeBtn.addEventListener('click', (e) => {
     e.preventDefault()
     let data = getFormData()
     setRequiredRecipeTimes(data)
-    validateForm(data)
-    // if (validate) {
-    //     if (data.prepTime && data.cookingTime) {
-    //         data.duration = parseInt(data.prepTime) + parseInt(data.cookingTime)
-    //     } else {
-    //         data.prepTime = 'null'
-    //         data.cookingTime = 'null'
-    //     }
-    // }
-    // insert fetch request
+    let validate = validateForm(data)
+    if (validate) {
+        if (data.prepTime === '' || data.cookingTime === '') {
+            data.prepTime = 'null'
+            data.cookingTime = 'null'
+        }
+        fetch('/', {
+            method: 'POST',
+            body: JSON.stringify(data),
+            headers: {
+                'content-type': 'application/json'
+            }
+        })
+            .then(data => data.json())
+            .then((response) => {
+                console.log(response)
+                if (!response.success) {
+                    let p_tag = document.createElement('p');
+                    let p_text = document.createTextNode('Something went wrong');
+                    p_tag.appendChild(p_text);
+                    alerts.appendChild(p_text);
+                } else {
+                    window.location.href = "/";
+                }
+            })
+    } else {
+        let p_tag = document.createElement('p');
+        let p_text = document.createTextNode('Something went wrong');
+        p_tag.appendChild(p_text);
+        alerts.appendChild(p_text);
+    }
 })
 
 const setRequiredRecipeTimes = (form) => {
