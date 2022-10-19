@@ -29,10 +29,10 @@ class RecipeViewhelper
             $result .= $userRecipe->getPrepTime() == null ?
                 '' : '<p class="m-1">Preparation time: ' . $userRecipe->getPrepTime() . ' mins</p>';
             $result .= '</div>';
+            $result .= '<p class="font-weight-bold m-1">Ingredients: </p>';
+            $result .= '<ul>' . self::displayIngredients($userRecipe->ingredients) . '</ul>';
             $result .= '<p class="font-weight-bold m-1">Instructions: </p>';
             $result .= '<p class="m-0 p-1">' . $userRecipe->getInstructions() . '</p>';
-            $result .= '<p class="font-weight-bold m-1">Ingredients: </p>';
-            $result .= '<p class="m-0 p-1">' . self::displayIngredients($userRecipe->ingredients) . '</p>';
             $result .= '</div></div>';
         }
         return self::handleNoRecipes($result);
@@ -55,11 +55,11 @@ class RecipeViewhelper
         return $output;
     }
 
-    private static function displayIngredients($ings): string
+    private static function displayIngredients($ingredients): string
     {
         $result = '';
-        foreach ($ings as $ing) {
-            $result .= '<p>' . $ing->getName() . '</p>';
+        foreach ($ingredients as $ingredient) {
+            $result .= '<li class="ingredient">' . $ingredient->getName() . '</li>';
         }
         return $result;
     }
