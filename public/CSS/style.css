@@ -142,3 +142,7 @@ body::-webkit-scrollbar {
 .remove-ingredient-button:hover {
     color: rgb(193, 41, 41);
 }
+
+.ingredient {
+    text-transform: capitalize;
+}

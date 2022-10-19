@@ -85,7 +85,7 @@ class RecipeModel
     public function getUserRecipes(string $email): array
     {
         $query = $this->db->prepare("
-        SELECT `name`, `duration`, `cookTime`, `prepTime`, `instructions`, `email`, `userId`
+        SELECT `name`, `duration`, `cookTime`, `prepTime`, `instructions`, `email`, `userId`, `recipeId`
                 FROM `recipes`
                 LEFT JOIN `users_recipes`
                     ON `recipes`.`id` = `users_recipes`.`recipeId`
