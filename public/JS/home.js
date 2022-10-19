@@ -30,7 +30,9 @@ ingredientsBtn.addEventListener('click', (e) => {
     removeIngredientsBtns.forEach(button => {
         button.addEventListener('click', (e) => {
             e.preventDefault()
+            removeIngredientOnce(ingredientsArray, button.previousElementSibling.textContent)
             button.parentElement.remove()
+            console.log(ingredientsArray)
         })
     })
 })
@@ -155,3 +157,11 @@ const validateNum = (num) => {
         return false
     }
 }
+
+const removeIngredientOnce = (arr, value) => {
+    let index = arr.indexOf(value)
+    if (index > -1) {
+      arr.splice(index, 1)
+    }
+    return arr
+  }
