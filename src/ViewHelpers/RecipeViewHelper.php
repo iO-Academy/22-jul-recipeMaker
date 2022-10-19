@@ -2,6 +2,8 @@
 
 namespace App\ViewHelpers;
 
+use App\Entities\IngredientEntity;
+
 class RecipeViewhelper
 {
     /**
@@ -29,6 +31,8 @@ class RecipeViewhelper
             $result .= '</div>';
             $result .= '<p class="font-weight-bold m-1">Instructions: </p>';
             $result .= '<p class="m-0 p-1">' . $userRecipe->getInstructions() . '</p>';
+            $result .= '<p class="font-weight-bold m-1">Ingredients: </p>';
+            $result .= '<p class="m-0 p-1">' . self::displayIngredients($userRecipe->ingredients) . '</p>';
             $result .= '</div></div>';
         }
         return self::handleNoRecipes($result);
@@ -49,5 +53,14 @@ class RecipeViewhelper
             return $result;
         }
         return $output;
+    }
+
+    private static function displayIngredients($ings): string
+    {
+        $result = '';
+        foreach ($ings as $ing) {
+            $result .= '<p>' . $ing->getName() . '</p>';
+        }
+        return $result;
     }
 }
