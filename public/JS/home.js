@@ -4,6 +4,7 @@ const submitRecipeBtn = document.querySelector('.submitRecipeBtn')
 const newRecipeForm = document.querySelector('#newRecipeForm')
 const ingredientsBtn = document.querySelector('.ingredients-button')
 const ingredientsList = document.querySelector('.ingredients-list')
+const ingredientErrorMessage = document.querySelector('.ingredientErrorMessage')
 
 let ingredientsArray = []
 
@@ -20,24 +21,28 @@ addRecipeBtn.addEventListener('click', (e) => {
 
 ingredientsBtn.addEventListener('click', (e) => {
     e.preventDefault()
-    ingredientsArray.push(newRecipeForm.elements['ingredients'].value)
-    let divTag = document.createElement('div')
-    divTag.classList.add('d-flex', 'align-items-center', )
-    divTag.innerHTML += '<li>' + newRecipeForm.elements['ingredients'].value + '</li>'
-    divTag.innerHTML += '<button type="button" class="remove-ingredient-button">x</button>'
-    ingredientsList.appendChild(divTag)
-    newRecipeForm.elements['ingredients'].value = ''
-    newRecipeForm.elements['ingredients'].focus()
-
-    let removeIngredientsBtns = document.querySelectorAll('.remove-ingredient-button')
-    removeIngredientsBtns.forEach(button => {
-        button.addEventListener('click', (e) => {
-            e.preventDefault()
-            removeIngredientOnce(ingredientsArray, button.previousElementSibling.textContent)
-            button.parentElement.remove()
-            console.log(ingredientsArray)
+    ingredientErrorMessage.innerHTML = ''
+    let ingredient = newRecipeForm.elements['ingredients'].value
+    if (validateIngredient(ingredient, ingredientsArray)) {
+        ingredientsArray.push(ingredient)
+        let divTag = document.createElement('div')
+        divTag.classList.add('d-flex', 'align-items-center', )
+        divTag.innerHTML += '<li>' + ingredient + '</li>'
+        divTag.innerHTML += '<button type="button" class="remove-ingredient-button">x</button>'
+        ingredientsList.appendChild(divTag)
+        newRecipeForm.elements['ingredients'].value = ''
+        newRecipeForm.elements['ingredients'].focus()
+    
+        let removeIngredientsBtns = document.querySelectorAll('.remove-ingredient-button')
+        removeIngredientsBtns.forEach(button => {
+            button.addEventListener('click', (e) => {
+                e.preventDefault()
+                removeIngredientOnce(ingredientsArray, button.previousElementSibling.textContent)
+                button.parentElement.remove()
+                console.log(ingredientsArray)
+            })
         })
-    })
+    }
 })
 
 
@@ -168,3 +173,17 @@ const removeIngredientOnce = (arr, value) => {
     }
     return arr
   }
+
+const validateIngredient = (ingredient, ingredientsArray) => {
+    let success = true
+    if (ingredientsArray.includes(ingredient)) {
+        ingredientErrorMessage.innerHTML = 'Ingredient already added'
+        success = false
+    }
+
+    if (validateString(ingredient) === false) {
+        ingredientErrorMessage.innerHTML = 'Ingredient must be alphanumeric'
+        success = false
+    }
+    return success
+}
