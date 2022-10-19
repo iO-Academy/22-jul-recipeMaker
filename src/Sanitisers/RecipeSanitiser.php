@@ -28,7 +28,7 @@ class RecipeSanitiser
             if (isset($recipe['ingredients'])) {
                 $result['ingredients'] = [];
                 foreach ($recipe['ingredients'] as $ingredients) {
-                    $result['ingredients'] .= filter_var($ingredients, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+                    $result['ingredients'][] .= filter_var($ingredients, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
                 }
             }
             return $result;

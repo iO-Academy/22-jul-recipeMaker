@@ -46,16 +46,14 @@ class AddRecipeController extends Controller
                 $validatedRecipe['prepTime']
             );
             $recipeId = $this->recipeModel->getLastRecipeId();
-            $userId = $_SESSION['userId'];
+            //for testing via postman:
+                //comment out this line below
+            // $userId = $_SESSION['userId'];
+                //uncomment this line below
+            $userId = 1;
+
             $result = $this->recipeModel->linkRecipeToUser($userId, $recipeId);
 
-            //get ingredients in array
-            //validate and sanitise
-            //foreach through ings as ing
-            //add ingredient
-            //get last ing id
-            //update link table
-            //move to next
             if (isset($validatedRecipe['ingredients'])) {
                 foreach ($validatedRecipe['ingredients'] as $ingredient) {
                     $this->ingredientModel->addNewIngredient($ingredient);
