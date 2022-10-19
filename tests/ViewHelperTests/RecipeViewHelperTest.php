@@ -11,7 +11,7 @@ class RecipeViewHelperTest extends TestCase
     public function testSuccessDisplayUserRecipes()
     {
         $expected = '<div class="col-12 col-lg-3 recipe m-3 p-0">';
-        $expected .= '<div class="d-flex align-items-center m-2 justify-content-between">';
+        $expected .= '<div class="recipe-header d-flex align-items-center justify-content-between">';
         $expected .= '<h2 class="my-auto recipe-name">mikey</h2><div class="d-flex">';
         $expected .= '<h3 class="my-auto recipe-duration mx-1">45 mins</h3>';
         $expected .= '<button class="recipe-button">+</button></div></div>';

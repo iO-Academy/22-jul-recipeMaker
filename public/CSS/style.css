@@ -56,6 +56,15 @@ body {
 
 .recipe-content {
     background-color: #d9f3f3;
+    padding: 0 18px;
+    display: none;
+    overflow: hidden;
+}
+
+.recipe-header {
+    background-color: #a8ebeb;
+    padding: 10px;
+    min-height: 70px;
 }
 
 .recipe-name {
@@ -82,4 +91,3 @@ body {
 .recipe-button:hover {
     background-color: #4d9e51;
 }
-
