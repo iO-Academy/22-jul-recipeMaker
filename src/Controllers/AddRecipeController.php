@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Abstracts\Controller;
 use App\CustomExceptions\InvalidRecipeException;
+use App\Models\IngredientModel;
 use App\Models\RecipeModel;
 use App\Sanitisers\RecipeSanitiser;
 use App\Validators\RecipeValidator;
@@ -13,10 +14,12 @@ use Psr\Http\Message\ResponseInterface as Response;
 class AddRecipeController extends Controller
 {
     private $recipeModel;
+    private $ingredientModel;
 
-    public function __construct(RecipeModel $recipeModel)
+    public function __construct(RecipeModel $recipeModel, IngredientModel $ingredientModel)
     {
         $this->recipeModel = $recipeModel;
+        $this->ingredientModel = $ingredientModel;
     }
 
     public function __invoke(Request $request, Response $response, array $args)
@@ -45,6 +48,15 @@ class AddRecipeController extends Controller
             $recipeId = $this->recipeModel->getLastRecipeId();
             $userId = $_SESSION['userId'];
             $result = $this->recipeModel->linkRecipeToUser($userId, $recipeId);
+
+            if (isset($validatedRecipe['ingredients'])) {
+                foreach ($validatedRecipe['ingredients'] as $ingredient) {
+                    $this->ingredientModel->addNewIngredient($ingredient);
+                    $ingredientId = $this->ingredientModel->getLastIngredientId();
+                    $result = $this->ingredientModel->linkIngredientToRecipe($recipeId, $ingredientId);
+                }
+            }
+
             $message = 'Recipe added to DB';
         } catch (InvalidRecipeException $exception) {
             $data['message'] = $exception->getMessage();
