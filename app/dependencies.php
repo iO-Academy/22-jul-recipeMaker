@@ -48,6 +48,7 @@ return function (ContainerBuilder $containerBuilder) {
     // models
     $container['UserModel'] = DI\factory('\App\Factories\UserModelFactory');
     $container['RecipeModel'] = DI\factory('\App\Factories\RecipeModelFactory');
+    $container['IngredientModel'] = DI\factory('\App\Factories\IngredientModelFactory');
 
     $containerBuilder->addDefinitions($container);
 };
