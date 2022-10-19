@@ -46,12 +46,7 @@ class AddRecipeController extends Controller
                 $validatedRecipe['prepTime']
             );
             $recipeId = $this->recipeModel->getLastRecipeId();
-            //for testing via postman:
-                //comment out this line below
-            // $userId = $_SESSION['userId'];
-                //uncomment this line below
-            $userId = 1;
-
+            $userId = $_SESSION['userId'];
             $result = $this->recipeModel->linkRecipeToUser($userId, $recipeId);
 
             if (isset($validatedRecipe['ingredients'])) {
