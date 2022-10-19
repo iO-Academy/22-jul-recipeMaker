@@ -10,6 +10,7 @@ class AddRecipeControllerFactory
     public function __invoke(ContainerInterface $container): AddRecipeController
     {
         $recipeModel = $container->get('RecipeModel');
-        return new AddRecipeController($recipeModel);
+        $ingredientModel = $container->get('IngredientModel');
+        return new AddRecipeController($recipeModel, $ingredientModel);
     }
 }
