@@ -3,6 +3,7 @@ const addRecipeAccordion = document.querySelector('.addRecipeAccordion')
 const submitRecipeBtn = document.querySelector('.submitRecipeBtn')
 const newRecipeForm = document.querySelector('#newRecipeForm')
 const ingredientsBtn = document.querySelector('.ingredients-button')
+const ingredientsList = document.querySelector('.ingredients-list')
 
 let ingredientsArray = []
 
@@ -14,14 +15,26 @@ addRecipeBtn.addEventListener('click', (e) => {
     } else {
         addRecipeAccordion.style.maxHeight = addRecipeAccordion.scrollHeight + "px"
         e.currentTarget.textContent = "-"
-      }
+    }
 })
 
 ingredientsBtn.addEventListener('click', (e) => {
     e.preventDefault()
     ingredientsArray.push(newRecipeForm.elements['ingredients'].value)
-    console.log(ingredientsArray)
+    let divTag = document.createElement('div')
+    divTag.classList.add('d-flex', 'align-items-center', )
+    divTag.innerHTML += '<li>' + newRecipeForm.elements['ingredients'].value + '</li>'
+    divTag.innerHTML += '<button type="button" class="remove-ingredient-button">x</button>'
+    ingredientsList.appendChild(divTag)
+    let removeIngredientsBtns = document.querySelectorAll('.remove-ingredient-button')
+    removeIngredientsBtns.forEach(button => {
+        button.addEventListener('click', (e) => {
+            e.preventDefault()
+            button.parentElement.remove()
+        })
+    })
 })
+
 
 const getFormData = () => {
     let data = {
