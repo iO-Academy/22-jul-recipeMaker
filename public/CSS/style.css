@@ -54,6 +54,13 @@ body::-webkit-scrollbar {
     max-height: 0;
     overflow: hidden;
     transition: max-height 0.2s ease-out;
+    overflow: scroll;
+    -ms-overflow-style: none;  /* Internet Explorer 10+ */
+    scrollbar-width: none;  /* Firefox */
+}
+
+.addRecipeAccordion::-webkit-scrollbar { 
+    display: none;  /* Safari and Chrome */
 }
 
 .addRecipeAccordion label {

@@ -26,6 +26,9 @@ ingredientsBtn.addEventListener('click', (e) => {
     divTag.innerHTML += '<li>' + newRecipeForm.elements['ingredients'].value + '</li>'
     divTag.innerHTML += '<button type="button" class="remove-ingredient-button">x</button>'
     ingredientsList.appendChild(divTag)
+    newRecipeForm.elements['ingredients'].value = ''
+    newRecipeForm.elements['ingredients'].focus()
+
     let removeIngredientsBtns = document.querySelectorAll('.remove-ingredient-button')
     removeIngredientsBtns.forEach(button => {
         button.addEventListener('click', (e) => {
