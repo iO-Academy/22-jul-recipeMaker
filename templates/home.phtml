@@ -23,7 +23,7 @@
     </nav>
     <div class="col-12 addRecipeAccordion">
         <h2 class="text-center" >Add a new recipe</h2>
-        <form id="newRecipeForm" class="d-flex justify-content-center align-items center flex-column pb-5">
+        <form id="newRecipeForm" class="d-flex justify-content-center align-items center flex-column">
             <label for="recipeName">Recipe Name</label>
             <input type="text" class="recipeInput strInput" name="recipeName" id="recipeName" data-required="true"/>
             <p class="errorMessages" ></p>
@@ -45,8 +45,19 @@
             <label for="instructions">Instructions</label>
             <textarea type="text" class="recipeInput insInput" name="instructions" id="instructions" data-required="true" data-max="5000" maxlength="5000"></textarea>
             <p class="errorMessages" ></p>
+            <div class="row">
+                <label class="col-12" for="ingredients">Ingredients</label>
+                <div class="col-12 d-flex align-items-center">
+                    <input type="text" class="ingredientsInput strInput w-100" name="ingredients" id="ingredients" />
+                    <button class="ingredients-button mx-3">+</button>
+                </div>
+                <div>
+                    <p class="ingredientErrorMessage errorMessages mx-3" ></p>
+                    <ul class="ingredients-list"></ul>
+                </div>
+            </div>
             <div>
-                <input type="submit" class="btn btn-success submitRecipeBtn mt-3 mb-5" />
+                <input type="submit" class="btn btn-success submitRecipeBtn my-2" />
             </div>
             <div class="errorMessages"  id="alerts" class="pb-2"></div>
         </form>

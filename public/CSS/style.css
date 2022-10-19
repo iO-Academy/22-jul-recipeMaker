@@ -45,11 +45,22 @@ body::-webkit-scrollbar {
     border-radius: 4px;
 }
 
+#addRecipeBtn:hover {
+    background-color: #4d9e51;
+} 
+
 .addRecipeAccordion {
     background-color: rgb(208, 244, 247);
     max-height: 0;
     overflow: hidden;
     transition: max-height 0.2s ease-out;
+    overflow: scroll;
+    -ms-overflow-style: none;  /* Internet Explorer 10+ */
+    scrollbar-width: none;  /* Firefox */
+}
+
+.addRecipeAccordion::-webkit-scrollbar { 
+    display: none;  /* Safari and Chrome */
 }
 
 .addRecipeAccordion label {
@@ -100,4 +111,34 @@ body::-webkit-scrollbar {
 
 .recipe-button:hover {
     background-color: #4d9e51;
+}
+
+.ingredients-button {
+    display: inline-block;
+    height: 2rem;
+    width: 2rem;
+    font-size: 1.2rem;
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 4px;
+}
+
+.remove-ingredient-button {
+    display: inline-block;
+    height: 2rem;
+    width: 2rem;
+    font-size: 1rem;
+    background-color: transparent;
+    border: none;
+    color: black;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 4px;
+}
+
+.remove-ingredient-button:hover {
+    color: rgb(193, 41, 41);
 }
