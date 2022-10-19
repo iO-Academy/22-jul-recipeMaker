@@ -66,7 +66,7 @@ class IngredientModel
     public function getUserIngredients(string $email): array
     {
         $query = $this->db->prepare("
-        SELECT `ingredients`.`name`, `ingredientId`
+        SELECT `ingredients`.`name`, `ingredientId`, `recipes_ingredients`.`recipeId`
         FROM `ingredients`
                 LEFT JOIN `recipes_ingredients`
                     ON `ingredients`.`id` = `recipes_ingredients`.`ingredientId`

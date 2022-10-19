@@ -11,6 +11,7 @@ class HomepageControllerFactory
     {
         $renderer = $container->get('renderer');
         $recipeModel = $container->get('RecipeModel');
-        return new HomepageController($renderer, $recipeModel);
+        $ingredientModel = $container->get('IngredientModel');
+        return new HomepageController($renderer, $recipeModel, $ingredientModel);
     }
 }
