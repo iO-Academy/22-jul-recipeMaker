@@ -22,7 +22,7 @@ addRecipeBtn.addEventListener('click', (e) => {
 ingredientsBtn.addEventListener('click', (e) => {
     e.preventDefault()
     ingredientErrorMessage.innerHTML = ''
-    let ingredient = newRecipeForm.elements['ingredients'].value
+    let ingredient = newRecipeForm.elements['ingredients'].value.toLowerCase()
     if (validateIngredient(ingredient, ingredientsArray)) {
         ingredientsArray.push(ingredient)
         let divTag = document.createElement('div')
