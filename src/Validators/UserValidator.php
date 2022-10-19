@@ -4,7 +4,7 @@ namespace App\Validators;
 
 class UserValidator
 {
-        /**
+    /**
      * Sanitise the applicant's email from the applicant's data.
      *
      * @param string $email

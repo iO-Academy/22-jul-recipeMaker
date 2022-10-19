@@ -1,6 +1,6 @@
 * {
 	box-sizing: border-box;
-    font-family: georama;
+    font-family: 'Georama', sans-serif;
 }
 
 nav {
@@ -13,6 +13,12 @@ body {
     background-size: cover;
     height: 100vh;
     background-position: center;
+    -ms-overflow-style: none;  /* Internet Explorer 10+ */
+    scrollbar-width: none;  /* Firefox */
+}
+
+body::-webkit-scrollbar { 
+    display: none;  /* Safari and Chrome */
 }
 
 .loginForm {
@@ -21,4 +27,77 @@ body {
 
 .loginForm p {
     font-size: 0.9em;
+}
+
+.errorMessages {
+    color: rgb(199, 2, 2);
+}
+
+#addRecipeBtn {
+    font-size: 2rem;
+    height: 3rem;
+    width: 3rem;
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 4px;
+}
+
+.addRecipeAccordion {
+    background-color: rgb(208, 244, 247);
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.2s ease-out;
+}
+
+.addRecipeAccordion label {
+    font-size: 1.5rem;
+}
+
+.cookingTimes {
+    background-color: #a8ebeb;
+}
+
+.no-recipe {
+    background-color: #d9f3f3;
+}
+
+.recipe-content {
+    background-color: #d9f3f3;
+    padding: 0 18px;
+    display: none;
+    overflow: hidden;
+}
+
+.recipe-header {
+    background-color: #a8ebeb;
+    padding: 10px;
+    min-height: 70px;
+}
+
+.recipe-name {
+    font-size: 1.2rem;
+}
+
+.recipe-duration {
+    font-size: 1rem;
+}
+
+.recipe-button {
+    display: inline-block;
+    height: 2rem;
+    width: 2rem;
+    font-size: 1.2rem;
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 4px;
+}
+
+.recipe-button:hover {
+    background-color: #4d9e51;
 }
