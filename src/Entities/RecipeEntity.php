@@ -11,6 +11,8 @@ class RecipeEntity
     private $instructions;
     private $email;
     private $userId;
+    private $recipeId;
+    // private $ingredients;
 
    /**
     * Get name
@@ -76,4 +78,32 @@ class RecipeEntity
     {
         return $this->userId;
     }
+
+    /**
+     * Get the value of recipeId
+     */
+    public function getRecipeId()
+    {
+        return $this->recipeId;
+    }
+
+    // /**
+    //  * Get the value of ingredients
+    //  */
+    // public function getIngredients()
+    // {
+    //     return $this->ingredients;
+    // }
+
+    // /**
+    //  * Set the value of ingredients
+    //  *
+    //  * @return  self
+    //  */
+    // public function setIngredients($ingredients)
+    // {
+    //     $this->ingredients = $ingredients;
+
+    //     return $this;
+    // }
 }

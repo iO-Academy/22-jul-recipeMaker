@@ -6,6 +6,7 @@ class IngredientEntity
 {
     private $name;
     private $ingredientId;
+    private $recipeId;
 
     /**
      * Get the value of name
@@ -21,5 +22,13 @@ class IngredientEntity
     public function getIngredientId(): int
     {
         return $this->ingredientId;
+    }
+
+    /**
+     * Get the value of recipeId
+     */
+    public function getRecipeId()
+    {
+        return $this->recipeId;
     }
 }
