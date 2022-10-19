@@ -6,12 +6,12 @@ const ingredientsBtn = document.querySelector('.ingredients-button')
 const ingredientsList = document.querySelector('.ingredients-list')
 const ingredientErrorMessage = document.querySelector('.ingredientErrorMessage')
 const ingredientInputField = document.querySelector('.ingredientsInput')
-const dataList = document.querySelector('#ingredientsList')
-
+const dataList = document.querySelector('datalist')
 
 let ingredientsArray = []
 
 ingredientInputField.addEventListener('focus', () => {
+    dataList.innerHTML = ''
     fetch('/ingredients', {
         method: 'GET',
         headers: {
@@ -21,8 +21,6 @@ ingredientInputField.addEventListener('focus', () => {
         .then(data => data.json())
         .then((response) => {
             let autocompleteData = response.data
-            let fragment = document.createDocumentFragment()
-            dataList.appendChild(fragment)
             console.log(autocompleteData)
             autocompleteData.forEach(datum => {
                 let optTag = document.createElement('option')
