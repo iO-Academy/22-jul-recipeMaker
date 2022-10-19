@@ -45,6 +45,16 @@ class AddRecipeController extends Controller
             $recipeId = $this->recipeModel->getLastRecipeId();
             $userId = $_SESSION['userId'];
             $result = $this->recipeModel->linkRecipeToUser($userId, $recipeId);
+
+            //get ingredients in array
+            //validate and sanitise
+            //foreach through ings as ing
+            //add ingredient
+            //get last ing id
+            //update link table
+            //move to next
+
+
             $message = 'Recipe added to DB';
         } catch (InvalidRecipeException $exception) {
             $data['message'] = $exception->getMessage();
