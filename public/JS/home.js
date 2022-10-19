@@ -1,17 +1,26 @@
-const addRecipeBtn = document.querySelector('#addRecipeBtn');
+const addRecipeBtn = document.querySelector('#addRecipeBtn')
 const addRecipeAccordion = document.querySelector('.addRecipeAccordion')
 const submitRecipeBtn = document.querySelector('.submitRecipeBtn')
 const newRecipeForm = document.querySelector('#newRecipeForm')
+const ingredientsBtn = document.querySelector('.ingredients-button')
+
+let ingredientsArray = []
 
 addRecipeBtn.addEventListener('click', (e) => {
     e.preventDefault()
     if (addRecipeAccordion.style.maxHeight) {
-        addRecipeAccordion.style.maxHeight = null;
+        addRecipeAccordion.style.maxHeight = null
         e.currentTarget.textContent = "+"
     } else {
-        addRecipeAccordion.style.maxHeight = addRecipeAccordion.scrollHeight + "px";
+        addRecipeAccordion.style.maxHeight = addRecipeAccordion.scrollHeight + "px"
         e.currentTarget.textContent = "-"
       }
+})
+
+ingredientsBtn.addEventListener('click', (e) => {
+    e.preventDefault()
+    ingredientsArray.push(newRecipeForm.elements['ingredients'].value)
+    console.log(ingredientsArray)
 })
 
 const getFormData = () => {
@@ -30,35 +39,35 @@ const getFormData = () => {
 
 const validateForm = (data) => {
     let success = true
-    let inputs = document.querySelectorAll('.recipeInput');
+    let inputs = document.querySelectorAll('.recipeInput')
     inputs.forEach(function (element) {
         let required = element.getAttribute('data-required')
         if (required && element.value.length < 1) {
-            element.nextElementSibling.innerHTML = element.previousElementSibling.innerHTML + ' is a required field! <br>';
-            success = false;
+            element.nextElementSibling.innerHTML = element.previousElementSibling.innerHTML + ' is a required field! <br>'
+            success = false
         } else {
             element.nextElementSibling.innerHTML = ''
         }
 
         if (element.className === 'recipeInput strInput') {
             if (validateString(element.value) === false) {
-                element.nextElementSibling.innerHTML = element.previousElementSibling.innerHTML + ' must be a valid name <br>';
+                element.nextElementSibling.innerHTML = element.previousElementSibling.innerHTML + ' must be a valid name <br>'
                 success = false
             }
         }
         
         if (required && element.className === 'recipeInput numInput') {
             if (validateNum(element.value) === false) {
-                element.nextElementSibling.innerHTML = element.previousElementSibling.innerHTML + ' must be a valid number <br>';
+                element.nextElementSibling.innerHTML = element.previousElementSibling.innerHTML + ' must be a valid number <br>'
                 success = false
             }
         }
 
         if (element.className === "recipeInput insInput") {
-            let maxLength = element.getAttribute('data-max');
+            let maxLength = element.getAttribute('data-max')
             if (maxLength != null && element.value.length > maxLength) {
-                element.nextElementSibling.innerHTML = element.previousElementSibling.innerHTML + ' is too long, must be less than ' + maxLength + ' characters! <br>';
-                success = false;
+                element.nextElementSibling.innerHTML = element.previousElementSibling.innerHTML + ' is too long, must be less than ' + maxLength + ' characters! <br>'
+                success = false
             }
         }
     })
@@ -95,7 +104,7 @@ submitRecipeBtn.addEventListener('click', (e) => {
                 let alerts = document.querySelector('#alerts')
                 alerts.textContent = 'Something went wrong'
             } else {
-                window.location.href = "/";
+                window.location.href = "/"
             }
         })
     } else {
@@ -117,7 +126,7 @@ const setRequiredRecipeTimes = (form) => {
 }
 
 const validateString = (string) => {
-    let pattern = /^[a-zA-Z0-9 ,.'-]+$/i;
+    let pattern = /^[a-zA-Z0-9 ,.'-]+$/i
     if(pattern.test(string) && string.length < 255) {
         return true
     } else {
@@ -126,7 +135,7 @@ const validateString = (string) => {
 }
 
 const validateNum = (num) => {
-    let pattern = /^[0-9]+$/i;
+    let pattern = /^[0-9]+$/i
     if(pattern.test(num) && num.length < 10) {
         return true
     } else {

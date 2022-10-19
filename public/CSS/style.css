@@ -45,6 +45,10 @@ body::-webkit-scrollbar {
     border-radius: 4px;
 }
 
+#addRecipeBtn:hover {
+    background-color: #4d9e51;
+} 
+
 .addRecipeAccordion {
     background-color: rgb(208, 244, 247);
     max-height: 0;
@@ -100,4 +104,17 @@ body::-webkit-scrollbar {
 
 .recipe-button:hover {
     background-color: #4d9e51;
+}
+
+.ingredients-button {
+    display: inline-block;
+    height: 2rem;
+    width: 2rem;
+    font-size: 1.2rem;
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 4px;
 }

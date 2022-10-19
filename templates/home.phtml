@@ -45,6 +45,15 @@
             <label for="instructions">Instructions</label>
             <textarea type="text" class="recipeInput insInput" name="instructions" id="instructions" data-required="true" data-max="5000" maxlength="5000"></textarea>
             <p class="errorMessages" ></p>
+            <div class="row">
+                <label class="col-12" for="ingredients">Ingredients</label>
+                <div class="col-12 d-flex align-items-center">
+                    <input type="text" class="ingredientsInput strInput w-100" name="ingredients" id="ingredients" />
+                    <button class="ingredients-button mx-3">+</button>
+                </div>
+                <ul></ul>
+                <p class="errorMessages" ></p>
+            </div>
             <div>
                 <input type="submit" class="btn btn-success submitRecipeBtn mt-3 mb-5" />
             </div>
