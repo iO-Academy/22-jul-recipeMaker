@@ -33,12 +33,14 @@ class AddRecipeController extends Controller
         try {
             RecipeValidator::validateRecipeForm($recipe);
             $validatedRecipe = RecipeSanitiser::sanitiseNewRecipe($recipe);
+            $validatedRecipe['cookTime'] = $validatedRecipe['cookTime'] ?? null;
+            $validatedRecipe['prepTime'] = $validatedRecipe['prepTime'] ?? null;
             $this->recipeModel->addNewRecipe(
                 $validatedRecipe['name'],
                 $validatedRecipe['duration'],
+                $validatedRecipe['instructions'],
                 $validatedRecipe['cookTime'],
-                $validatedRecipe['prepTime'],
-                $validatedRecipe['instructions']
+                $validatedRecipe['prepTime']
             );
             $recipeId = $this->recipeModel->getLastRecipeId();
             $userId = $_SESSION['userId'];
@@ -47,6 +49,7 @@ class AddRecipeController extends Controller
         } catch (InvalidRecipeException $exception) {
             $data['message'] = $exception->getMessage();
         }
+
         if (isset($result) && $result) {
             $data = [
                 'success' => true,

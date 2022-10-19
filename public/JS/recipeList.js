@@ -5,8 +5,10 @@ buttons.forEach(button => {
         let panel = button.parentElement.parentElement.nextElementSibling;
         if (panel.style.display === "block") {
             panel.style.display = "none";
+            e.currentTarget.textContent = '+'
         } else {
             panel.style.display = "block";
+            e.currentTarget.textContent = '-'
         }
     })
 })

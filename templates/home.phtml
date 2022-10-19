@@ -11,12 +11,46 @@
     <link href="https://fonts.googleapis.com/css2?family=Georama:wght@400;700&display=swap" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <script defer src="/JS/home.js"></script>
     <script defer src="/JS/recipeList.js"></script>
 </head>
 <body class="container-fluid px-0">
     <nav class="navbar row navbar-light mx-0">
-        <h1 class="col-12 text-center my-3">Fish Food</h1>
+        <h1 class="col-8 offset-2 text-center my-3">Fish Food</h1>
+        <div class="col-2">
+            <button id="addRecipeBtn" class="btn py-0">+</button>
+        </div>
     </nav>
+    <div class="col-12 addRecipeAccordion">
+        <h2 class="text-center" >Add a new recipe</h2>
+        <form id="newRecipeForm" class="d-flex justify-content-center align-items center flex-column pb-5">
+            <label for="recipeName">Recipe Name</label>
+            <input type="text" class="recipeInput strInput" name="recipeName" id="recipeName" data-required="true"/>
+            <p class="errorMessages" ></p>
+            <div class="d-flex justify-content-center align-items center flex-column border border-dark mt-3 p-4 cookingTimes">
+                <label for="duration">Duration (minutes)</label>
+                <input type="text" class="recipeInput numInput" name="duration" id="duration" />
+                <p class="errorMessages" ></p>
+                <p class="errorMessages"  id="durationAlerts"></p>
+            </div>
+            <p class="text-center fw-bold pt-1">OR</p>
+            <div class="d-flex justify-content-center align-items center flex-column border border-dark mb-3 p-4 cookingTimes">
+                <label for="cookingTime">Cooking Time (minutes)</label>
+                <input type="text" class="recipeInput numInput" name="cookingTime" id="cookingTime" />
+                <p class="errorMessages" ></p>
+                <label for="prepTime">Prep Time (minutes)</label>
+                <input type="text" class="recipeInput numInput" name="prepTime" id="prepTime" />
+                <p class="errorMessages" ></p>
+            </div>
+            <label for="instructions">Instructions</label>
+            <textarea type="text" class="recipeInput insInput" name="instructions" id="instructions" data-required="true" data-max="5000" maxlength="5000"></textarea>
+            <p class="errorMessages" ></p>
+            <div>
+                <input type="submit" class="btn btn-success submitRecipeBtn mt-3 mb-5" />
+            </div>
+            <div class="errorMessages"  id="alerts" class="pb-2"></div>
+        </form>
+    </div>
     <main class="container-fluid">
         <div class="row justify-content-center m-1">
             <?= \App\ViewHelpers\RecipeViewhelper::displayUserRecipes($userRecipes) ?>

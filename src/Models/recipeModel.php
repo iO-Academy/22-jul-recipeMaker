@@ -36,9 +36,9 @@ class RecipeModel
     public function addNewRecipe(
         $name,
         $duration,
-        $cookTime,
-        $prepTime,
-        $instructions
+        $instructions,
+        $cookTime = null,
+        $prepTime = null
     ): bool {
         $query = $this->db->prepare("
         INSERT INTO `recipes` (
