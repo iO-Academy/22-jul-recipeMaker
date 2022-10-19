@@ -39,7 +39,6 @@ ingredientsBtn.addEventListener('click', (e) => {
                 e.preventDefault()
                 removeIngredientOnce(ingredientsArray, button.previousElementSibling.textContent)
                 button.parentElement.remove()
-                console.log(ingredientsArray)
             })
         })
     }
@@ -56,6 +55,9 @@ const getFormData = () => {
         newRecipeForm.elements['prepTime'].value !== '') {
         data.cookTime = newRecipeForm.elements['cookingTime'].value
         data.prepTime = newRecipeForm.elements['prepTime'].value
+    }
+    if (ingredientsArray !== []) {
+        data.ingredients = ingredientsArray
     }
     return data
 }
