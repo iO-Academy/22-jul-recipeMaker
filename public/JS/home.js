@@ -5,8 +5,23 @@ const newRecipeForm = document.querySelector('#newRecipeForm')
 const ingredientsBtn = document.querySelector('.ingredients-button')
 const ingredientsList = document.querySelector('.ingredients-list')
 const ingredientErrorMessage = document.querySelector('.ingredientErrorMessage')
+const ingredientInputField = document.querySelector('.ingredientsInput')
 
 let ingredientsArray = []
+
+ingredientInputField.addEventListener('focus', () => {
+    fetch('/ingredients', {
+        method: 'GET',
+        headers: {
+            'content-type': 'application/json'
+        }
+    })
+        .then(data => data.json())
+        .then((response) => {
+            let autocompleteData = response.data
+            console.log(autocompleteData)
+    })
+})
 
 addRecipeBtn.addEventListener('click', (e) => {
     e.preventDefault()

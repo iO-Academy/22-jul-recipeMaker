@@ -43,7 +43,8 @@ return function (ContainerBuilder $containerBuilder) {
     $container['AcceptLoginController'] = DI\factory('\App\Factories\AcceptLoginControllerFactory');
     $container['HomepageController'] = DI\factory('\App\Factories\HomepageControllerFactory');
     $container['LoginController'] = DI\factory('\App\Factories\LoginControllerFactory');
-    $container['AddRecipeController'] = DI\factory(('\App\Factories\AddRecipeControllerFactory'));
+    $container['AddRecipeController'] = DI\factory('\App\Factories\AddRecipeControllerFactory');
+    $container['GetIngredientsController'] = DI\factory('\App\Factories\GetIngredientsControllerFactory');
 
     // models
     $container['UserModel'] = DI\factory('\App\Factories\UserModelFactory');
