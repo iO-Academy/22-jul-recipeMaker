@@ -52,16 +52,17 @@ class AddRecipeController extends Controller
             //get ingredients in array
             //validate and sanitise
             //foreach through ings as ing
-            // if (isset($validatedRecipe['ingredients'])) {
-            //     foreach ($validatedRecipe['ingredients'] as $ingredients) {
-                    
-            //     }
-            // }
             //add ingredient
             //get last ing id
             //update link table
             //move to next
-
+            if (isset($validatedRecipe['ingredients'])) {
+                foreach ($validatedRecipe['ingredients'] as $ingredient) {
+                    $this->ingredientModel->addNewIngredient($ingredient);
+                    $ingredientId = $this->ingredientModel->getLastIngredientId();
+                    $result = $this->ingredientModel->linkIngredientToRecipe($recipeId, $ingredientId);
+                }
+            }
 
             $message = 'Recipe added to DB';
         } catch (InvalidRecipeException $exception) {
