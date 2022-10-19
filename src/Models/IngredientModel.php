@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use App\Entities\IngredientClass;
 use App\Entities\IngredientEntity;
 
 class IngredientModel
@@ -81,6 +80,21 @@ class IngredientModel
         ");
         $query->bindParam(':email', $email);
         $query->setFetchMode(\PDO::FETCH_CLASS, IngredientEntity::class);
+        $query->execute();
+        return $query->fetchAll();
+    }
+
+    /**
+     * gets all ingredients from the database
+     *
+     * @return array
+     */
+    public function getAllIngredients(): array
+    {
+        $query = $this->db->prepare("
+        SELECT `name`, `id`
+        FROM `ingredients`
+        ");
         $query->execute();
         return $query->fetchAll();
     }
