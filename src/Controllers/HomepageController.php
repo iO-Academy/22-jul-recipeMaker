@@ -28,30 +28,15 @@ class HomepageController extends Controller
             $userEmail = $_SESSION['user'];
             $userRecipes = $this->recipeModel->getUserRecipes($userEmail);
             $userIngredients = $this->ingredientModel->getUserIngredients($userEmail);
-            foreach ($userRecipes as $recipe) {
-                foreach ($userIngredients as $ingredient) {
-                    if ($ingredient->getRecipeId() === $recipe->getRecipeId()) {
-                        $recipe->addIngredient($ingredient);
-                    }
-                }
-            }
+            $userRecipes = $this->recipeModel->attachIngredientstoRecipe(
+                $userRecipes,
+                $userIngredients
+            );
             $filterData = $request->getQueryParams();
-            if (isset($filterData['id'])) {
-                $filteredIds = array_map('intval', explode(',', $filterData['id']));
-                $filteredRecipes = [];
-                foreach ($userRecipes as $recipe) {
-                    $ingredientArray = [];
-                    foreach ($recipe->getIngredients() as $ingredient) {
-                        $ingredientArray[] = $ingredient->getIngredientId();
-                    }
-                    if ($ingredientArray == $filteredIds) {
-                        array_push($filteredRecipes, $recipe);
-                    }
-                }
-                $args['userRecipes'] = $filteredRecipes;
-            } else {
-                $args['userRecipes'] = $userRecipes;
-            }
+            $args['userRecipes'] = $this->recipeModel->filterRecipesByIngredient(
+                $filterData,
+                $userRecipes
+            );
             $args['userIngredients'] = array_unique($userIngredients);
             return $this->renderer->render($response, 'home.phtml', $args);
         } else {
