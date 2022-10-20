@@ -98,4 +98,50 @@ class RecipeModel
         $query->execute();
         return $query->fetchAll();
     }
+
+    /**
+     * Attaches Ingredients into Recipe Objects
+     *
+     * @param array $userRecipes
+     * @param array $userIngredients
+     * @return array
+     */
+    public function attachIngredientstoRecipe(array $userRecipes, array $userIngredients): array
+    {
+        foreach ($userRecipes as $recipe) {
+            foreach ($userIngredients as $ingredient) {
+                if ($ingredient->getRecipeId() === $recipe->getRecipeId()) {
+                    $recipe->addIngredient($ingredient);
+                }
+            }
+        }
+        return $userRecipes;
+    }
+
+    /**
+     * Filters Recipes based on ingredient data and returns an array of recipes
+     *
+     * @param [array] $data
+     * @param [array] $userRecipes
+     * @return array
+     */
+    public function filterRecipesByIngredient(array $data, array $userRecipes): array
+    {
+        if (isset($data['id'])) {
+            $filteredIds = array_map('intval', explode(',', $data['id']));
+            $filteredRecipes = [];
+            foreach ($userRecipes as $recipe) {
+                $ingredientArray = [];
+                foreach ($recipe->getIngredients() as $ingredient) {
+                    $ingredientArray[] = $ingredient->getIngredientId();
+                }
+                if ($ingredientArray == $filteredIds) {
+                    array_push($filteredRecipes, $recipe);
+                }
+            }
+            return $filteredRecipes;
+        } else {
+            return $userRecipes;
+        }
+    }
 }
