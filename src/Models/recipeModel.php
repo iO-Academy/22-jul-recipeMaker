@@ -135,7 +135,9 @@ class RecipeModel
                 foreach ($recipe->getIngredients() as $ingredient) {
                     $ingredientArray[] = $ingredient->getIngredientId();
                 }
-                if ($ingredientArray == $filteredIds) {
+                sort($ingredientArray);
+                sort($filteredIds);
+                if ($ingredientArray === $filteredIds) {
                     array_push($filteredRecipes, $recipe);
                 }
             }
