@@ -1,38 +1,46 @@
-# Slim Framework 4 Skeleton Application
 
-Use this skeleton application to quickly setup and start working on a new Slim Framework 4 application. This application uses the latest Slim 4 with Slim PSR-7 implementation and PHP-DI container implementation along with the PHP-View template renderer. It also uses the Monolog logger.
+# Fish Food
+### Description
+Fish Food is an MVC object-orientated PHP project, architectured using Slim framework and styled with Bootstrap and CSS. Using a relational SQL database, the app links users to recipes and recipes to ingredients, before displaying information on the front end using JavaScript.
 
-This skeleton application was built for Composer. This makes setting up a new Slim Framework application quick and easy.
+Users are able create accounts, add their favourite recipes, and then filter through recipes to decide what they can make with a defined set of ingredients. All functions were unit tested, type-hinted and custom error handling used throughout. 
 
-## Install the Application
+## Getting Started
 
-Create a new directory with your project name, e.g:
-
-
-```bash
-mkdir academyProject
+### Dependencies
+``` 
+- PHP version 7.4.30 
+- Slim version 4
+- MySQL version 5.7.38
+- Composer version 2.4.1
+- PHPUnit version 9.5.21
+- Bootstrap version 5.2
 ```
-
-Once inside the new directory, clone this repo:
-
-```bash
-git clone git@github.com:Mayden-Academy/slim4-skeleton.git .
+### Installing
+Clone this repo:
 ```
-
-One cloned, you must install the slim components by running:
-
-```bash
-composer install
+git@github.com:iO-Academy/22-jul-recipeMaker.git
 ```
-
-To run the application locally:
-```bash
-composer start
-
+Navigate into the newly created repo:
 ```
-Run this command in the application directory to run the test suite
-```bash
-composer test
+cd 22-jul-recipeMaker
 ```
+From the root of the project run:
+```
+Composer install
+```
+Install the database `fishFood.sql` into a db named `fishFood`
 
-That's it! Now go build something cool.
+Ensure your local database host, username and password details are correct in:
+```
+app/dependencies.php
+```
+From the root of the project run:
+```
+Composer install
+```
+The application will now be available wherever you access it
+### Authors
+- Aidan Maskell - [@aidanmaskell](github.com/aidanmaskell)
+- Chris Walton - [@cr-walton](github.com/cr-walton)
+- Mikey Ying - [@mikeycodingstuff](github.com/mikeycodingstuff)
