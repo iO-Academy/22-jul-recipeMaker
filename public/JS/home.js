@@ -21,7 +21,6 @@ ingredientInputField.addEventListener('focus', () => {
     .then(data => data.json())
     .then((response) => {
         let autocompleteData = response.data
-        console.log(autocompleteData)
         autocompleteData.forEach(datum => {
             let optTag = document.createElement('option')
             optTag.innerHTML = datum.name

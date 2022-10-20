@@ -15,7 +15,6 @@ button.addEventListener('click', (e) => {
         })
         .then(data => data.json())
         .then((response) => {
-            console.log(response)
             if (!response.success) {
                 let p_tag = document.createElement('p')
                 let p_text = document.createTextNode('Something went wrong')
