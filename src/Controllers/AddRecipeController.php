@@ -51,11 +51,11 @@ class AddRecipeController extends Controller
 
             if (isset($validatedRecipe['ingredients'])) {
                 $storedIngredients = $this->ingredientModel->getAllIngredients();
-                $duplicateIngredientIds = $this->ingredientModel->filterDuplicateIngredients(
+                $duplicateIngredientIds = $this->ingredientModel::filterDuplicateIngredients(
                     $validatedRecipe['ingredients'],
                     $storedIngredients
                 );
-                $newIngredients = $this->ingredientModel->removeDuplicateIngredients(
+                $newIngredients = $this->ingredientModel::removeDuplicateIngredients(
                     $validatedRecipe['ingredients'],
                     $storedIngredients
                 );

@@ -4,6 +4,8 @@ namespace App\Models;
 
 use App\Entities\IngredientEntity;
 
+use function DI\string;
+
 class IngredientModel
 {
     private $db;
@@ -99,28 +101,36 @@ class IngredientModel
         return $query->fetchAll();
     }
 
-    public function filterDuplicateIngredients(array $ingredients, array $dbIngredients): array
+    public static function filterDuplicateIngredients(array $ingredients, array $dbIngredients): array
     {
         $duplicateIngredients = [];
         foreach ($dbIngredients as $dbIngredient) {
             foreach ($ingredients as $ingredient) {
-                if ($ingredient == $dbIngredient['name']) {
+                if (is_string($ingredient) && $ingredient == $dbIngredient['name']) {
                     array_push($duplicateIngredients, $dbIngredient['id']);
                 }
             }
         }
         return $duplicateIngredients;
     }
-    public function removeDuplicateIngredients(array $ingredients, array $dbIngredients): array
+    public static function removeDuplicateIngredients(array $ingredients, array $dbIngredients): array
     {
         $filteredIngredients = [];
-        foreach ($ingredients as $ingredient) {
-            foreach ($dbIngredients as $dbIngredient) {
-                if ($ingredient === $dbIngredient['name']) {
-                    $filteredIngredients[] = $ingredient;
+        if (is_string($ingredients[0])) {
+            foreach ($ingredients as $ingredient) {
+                if (is_string($ingredient)) {
+                    foreach ($dbIngredients as $dbIngredient) {
+                        if ($ingredient === $dbIngredient['name']) {
+                            $filteredIngredients[] = $ingredient;
+                        }
+                    }
+                } else {
+                    $filteredIngredients = [];
                 }
             }
+            return array_diff($ingredients, $filteredIngredients);
+        } else {
+            return [];
         }
-        return array_diff($ingredients, $filteredIngredients);
     }
 }
