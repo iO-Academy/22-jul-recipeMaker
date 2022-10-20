@@ -15,12 +15,23 @@
     <script defer src="/JS/recipeList.js"></script>
 </head>
 <body class="container-fluid px-0">
-    <nav class="navbar row navbar-light mx-0">
-        <h1 class="col-8 offset-2 text-center my-3">Fish Food</h1>
-        <div class="col-2">
+    <nav class="navbar row navbar-light mx-0 p-0 justify-content-between">
+        <div class="col-2 p-0 d-flex justify-content-center">
+            <button id="filter-button" class="btn py-0">Filter</button>
+        </div>
+        <h1 class="col-8 offset-2 text-center my-3 mx-0">Fish Food</h1>
+        <div class="col-2 p-0 d-flex justify-content-center">
             <button id="addRecipeBtn" class="btn py-0">+</button>
         </div>
     </nav>
+    <div class="col-12 filter-accordion">
+        <h2 class="text-center" >Filter recipes by ingredients:</h2>
+        <form id="filter-checklist">
+            <?= App\ViewHelpers\FilterViewHelper::displayIngredientsChecklist($userIngredients) ?>
+            <input type="submit" value="Submit" class="btn btn-success submit-filter-button">
+            <p class="filter-error-message" ></p>
+        </form>
+    </div>
     <div class="col-12 addRecipeAccordion">
         <h2 class="text-center" >Add a new recipe</h2>
         <form autocomplete="off" id="newRecipeForm" class="d-flex justify-content-center align-items center flex-column">

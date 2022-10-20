@@ -25,7 +25,6 @@ class HomepageController extends Controller
     public function __invoke(Request $request, Response $response, array $args)
     {
         if ($_SESSION['loggedIn'] == true) {
-            $filterData = $request->getQueryParams();
             $userEmail = $_SESSION['user'];
             $userRecipes = $this->recipeModel->getUserRecipes($userEmail);
             $userIngredients = $this->ingredientModel->getUserIngredients($userEmail);
@@ -36,21 +35,24 @@ class HomepageController extends Controller
                     }
                 }
             }
-            if (count($filterData) !== 0) {
+            $filterData = $request->getQueryParams();
+            if (isset($filterData['id'])) {
+                $filteredIds = array_map('intval', explode(',', $filterData['id']));
                 $filteredRecipes = [];
                 foreach ($userRecipes as $recipe) {
                     $ingredientArray = [];
                     foreach ($recipe->getIngredients() as $ingredient) {
-                        $ingredientarray[] = $ingredient->getId();
+                        $ingredientArray[] = $ingredient->getIngredientId();
                     }
-                    if ($ingredientArray === $filterData) {
-                        $filteredRecipes[] = $recipe;
+                    if ($ingredientArray == $filteredIds) {
+                        array_push($filteredRecipes, $recipe);
                     }
                 }
                 $args['userRecipes'] = $filteredRecipes;
             } else {
                 $args['userRecipes'] = $userRecipes;
             }
+            $args['userIngredients'] = array_unique($userIngredients);
             return $this->renderer->render($response, 'home.phtml', $args);
         } else {
             return $response->withHeader('Location', '/login');

@@ -98,10 +98,4 @@ class RecipeModel
         $query->execute();
         return $query->fetchAll();
     }
-
-    public function getFilteredRecipes(string $email, array $ingredientIds): array
-    {
-        $query = $this->db->prepare("
-        SELECT `name`, `duration`, `cookTime`, `")
-    }
 }

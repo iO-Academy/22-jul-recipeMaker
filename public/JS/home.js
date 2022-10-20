@@ -7,6 +7,11 @@ const ingredientsList = document.querySelector('.ingredients-list')
 const ingredientErrorMessage = document.querySelector('.ingredientErrorMessage')
 const ingredientInputField = document.querySelector('.ingredientsInput')
 const dataList = document.querySelector('datalist')
+const filterBtn = document.querySelector('#filter-button')
+const filterAccordion = document.querySelector('.filter-accordion')
+const submitFilterBtn = document.querySelector('.submit-filter-button')
+const filterOptions = document.querySelectorAll('.filter-option')
+const filterError = document.querySelector('.filter-error-message')
 
 let ingredientsArray = []
 
@@ -27,6 +32,44 @@ ingredientInputField.addEventListener('focus', () => {
             dataList.appendChild(optTag)
         })
     })
+})
+
+filterBtn.addEventListener('click', (e) => {
+    e.preventDefault()
+    if (filterAccordion.style.maxHeight) {
+        filterAccordion.style.maxHeight = null
+    } else {
+        filterAccordion.style.maxHeight = filterAccordion.scrollHeight + "px"
+    }
+})
+
+const getAndValidateFilterData = () => {
+    let data = []
+    filterOptions.forEach(option => {
+        if (option.checked == true) {
+            if (validateNum(option.name)) {
+                data.push(option.name)
+            } else {
+                filterError.textContent = 'error'
+            }
+        }
+    })
+    return data
+}
+
+const createGetData = (data) => {
+    let result = 'id='
+    data.forEach(id => {
+        result += id + ','
+    })
+    result = result.slice(0, -1)
+    return result
+}
+
+submitFilterBtn.addEventListener('click', (e) => {
+    e.preventDefault()
+    let data = getAndValidateFilterData()
+    window.location.href = `/?${createGetData(data)}`
 })
 
 addRecipeBtn.addEventListener('click', (e) => {
