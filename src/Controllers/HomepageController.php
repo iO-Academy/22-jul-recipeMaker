@@ -35,8 +35,24 @@ class HomepageController extends Controller
                     }
                 }
             }
-
-            $args['userRecipes'] = $userRecipes;
+            $filterData = $request->getQueryParams();
+            if (isset($filterData['id'])) {
+                $filteredIds = array_map('intval', explode(',', $filterData['id']));
+                $filteredRecipes = [];
+                foreach ($userRecipes as $recipe) {
+                    $ingredientArray = [];
+                    foreach ($recipe->getIngredients() as $ingredient) {
+                        $ingredientArray[] = $ingredient->getIngredientId();
+                    }
+                    if ($ingredientArray == $filteredIds) {
+                        array_push($filteredRecipes, $recipe);
+                    }
+                }
+                $args['userRecipes'] = $filteredRecipes;
+            } else {
+                $args['userRecipes'] = $userRecipes;
+            }
+            $args['userIngredients'] = array_unique($userIngredients);
             return $this->renderer->render($response, 'home.phtml', $args);
         } else {
             return $response->withHeader('Location', '/login');

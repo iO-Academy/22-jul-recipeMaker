@@ -101,6 +101,13 @@ class IngredientModel
         return $query->fetchAll();
     }
 
+    /**
+     * Filters ingredients already stored in the db into a new array
+     *
+     * @param array $ingredients
+     * @param array $dbIngredients
+     * @return array
+     */
     public static function filterDuplicateIngredients(array $ingredients, array $dbIngredients): array
     {
         $duplicateIngredients = [];
@@ -113,6 +120,14 @@ class IngredientModel
         }
         return $duplicateIngredients;
     }
+
+    /**
+     * Filters new ingredients to be added to the db into a new array
+     *
+     * @param array $ingredients
+     * @param array $dbIngredients
+     * @return array
+     */
     public static function removeDuplicateIngredients(array $ingredients, array $dbIngredients): array
     {
         $filteredIngredients = [];
