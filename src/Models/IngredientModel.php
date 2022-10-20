@@ -98,4 +98,29 @@ class IngredientModel
         $query->execute();
         return $query->fetchAll();
     }
+
+    public function filterDuplicateIngredients(array $ingredients, array $dbIngredients): array
+    {
+        $duplicateIngredients = [];
+        foreach ($dbIngredients as $dbIngredient) {
+            foreach ($ingredients as $ingredient) {
+                if ($ingredient == $dbIngredient['name']) {
+                    array_push($duplicateIngredients, $dbIngredient['id']);
+                }
+            }
+        }
+        return $duplicateIngredients;
+    }
+    public function removeDuplicateIngredients(array $ingredients, array $dbIngredients): array
+    {
+        $filteredIngredients = [];
+        foreach ($ingredients as $ingredient) {
+            foreach ($dbIngredients as $dbIngredient) {
+                if ($ingredient === $dbIngredient['name']) {
+                    $filteredIngredients[] = $ingredient;
+                }
+            }
+        }
+        return array_diff($ingredients, $filteredIngredients);
+    }
 }

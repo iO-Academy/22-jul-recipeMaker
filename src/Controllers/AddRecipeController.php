@@ -50,16 +50,22 @@ class AddRecipeController extends Controller
             $result = $this->recipeModel->linkRecipeToUser($userId, $recipeId);
 
             if (isset($validatedRecipe['ingredients'])) {
-                // Get all ingredients
-                // filter the input ingredients
-                // create an array of ingredient id -> already in db
-                // create an array of new ingredients -> insert
-                // add new ingredient ids to id array
-                // link these to the inserted recipe
-                foreach ($validatedRecipe['ingredients'] as $ingredient) {
+                $storedIngredients = $this->ingredientModel->getAllIngredients();
+                $duplicateIngredientIds = $this->ingredientModel->filterDuplicateIngredients(
+                    $validatedRecipe['ingredients'],
+                    $storedIngredients
+                );
+                $newIngredients = $this->ingredientModel->removeDuplicateIngredients(
+                    $validatedRecipe['ingredients'],
+                    $storedIngredients
+                );
+                foreach ($newIngredients as $ingredient) {
                     $this->ingredientModel->addNewIngredient($ingredient);
                     $ingredientId = $this->ingredientModel->getLastIngredientId();
                     $result = $this->ingredientModel->linkIngredientToRecipe($recipeId, $ingredientId);
+                }
+                foreach ($duplicateIngredientIds as $duplicateIngredientId) {
+                    $result = $this->ingredientModel->linkIngredientToRecipe($recipeId, $duplicateIngredientId);
                 }
             }
 

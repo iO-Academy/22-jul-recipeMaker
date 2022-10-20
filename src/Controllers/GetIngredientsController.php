@@ -34,6 +34,7 @@ class GetIngredientsController extends Controller
                 'message' => $message,
                 'data' => $ingredients
             ];
+            $statusCode = 200;
         } catch (Exception $e) {
             $data['message'] = $e->getMessage();
         }

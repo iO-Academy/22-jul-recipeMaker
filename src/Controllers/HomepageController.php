@@ -30,7 +30,6 @@ class HomepageController extends Controller
             //get all ingredients
             $userIngredients = $this->ingredientModel->getUserIngredients($userEmail);
             //foreach through to see where recipe id matches that in userrecipes
-
             foreach ($userRecipes as $recipe) {
                 $recipe->ingredients = [];
                 foreach ($userIngredients as $ingredient) {
