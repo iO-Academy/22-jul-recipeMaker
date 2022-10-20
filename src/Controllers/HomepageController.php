@@ -28,7 +28,6 @@ class HomepageController extends Controller
             $userEmail = $_SESSION['user'];
             $userRecipes = $this->recipeModel->getUserRecipes($userEmail);
             $userIngredients = $this->ingredientModel->getUserIngredients($userEmail);
-
             foreach ($userRecipes as $recipe) {
                 foreach ($userIngredients as $ingredient) {
                     if ($ingredient->getRecipeId() === $recipe->getRecipeId()) {

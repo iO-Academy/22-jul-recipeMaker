@@ -4,6 +4,8 @@ namespace App\Models;
 
 use App\Entities\IngredientEntity;
 
+use function DI\string;
+
 class IngredientModel
 {
     private $db;
@@ -97,5 +99,38 @@ class IngredientModel
         ");
         $query->execute();
         return $query->fetchAll();
+    }
+
+    public static function filterDuplicateIngredients(array $ingredients, array $dbIngredients): array
+    {
+        $duplicateIngredients = [];
+        foreach ($dbIngredients as $dbIngredient) {
+            foreach ($ingredients as $ingredient) {
+                if (is_string($ingredient) && $ingredient == $dbIngredient['name']) {
+                    array_push($duplicateIngredients, $dbIngredient['id']);
+                }
+            }
+        }
+        return $duplicateIngredients;
+    }
+    public static function removeDuplicateIngredients(array $ingredients, array $dbIngredients): array
+    {
+        $filteredIngredients = [];
+        if (is_string($ingredients[0])) {
+            foreach ($ingredients as $ingredient) {
+                if (is_string($ingredient)) {
+                    foreach ($dbIngredients as $dbIngredient) {
+                        if ($ingredient === $dbIngredient['name']) {
+                            $filteredIngredients[] = $ingredient;
+                        }
+                    }
+                } else {
+                    $filteredIngredients = [];
+                }
+            }
+            return array_diff($ingredients, $filteredIngredients);
+        } else {
+            return [];
+        }
     }
 }

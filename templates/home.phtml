@@ -23,7 +23,7 @@
     </nav>
     <div class="col-12 addRecipeAccordion">
         <h2 class="text-center" >Add a new recipe</h2>
-        <form id="newRecipeForm" class="d-flex justify-content-center align-items center flex-column">
+        <form autocomplete="off" id="newRecipeForm" class="d-flex justify-content-center align-items center flex-column">
             <label for="recipeName">Recipe Name</label>
             <input type="text" class="recipeInput strInput" name="recipeName" id="recipeName" data-required="true"/>
             <p class="errorMessages" ></p>
@@ -48,7 +48,8 @@
             <div class="row">
                 <label class="col-12" for="ingredients">Ingredients</label>
                 <div class="col-12 d-flex align-items-center">
-                    <input type="text" class="ingredientsInput strInput w-100" name="ingredients" id="ingredients" />
+                    <input list="ingredientsList" type="text" class="ingredientsInput strInput w-100" name="ingredients" id="ingredients" />
+                    <datalist id="ingredientsList"></datalist>
                     <button class="ingredients-button mx-3">+</button>
                 </div>
                 <div>
