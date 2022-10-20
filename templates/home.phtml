@@ -28,7 +28,8 @@
         <h2 class="text-center" >Filter recipes by ingredients:</h2>
         <form id="filter-checklist">
             <?= App\ViewHelpers\FilterViewHelper::displayIngredientsChecklist($userIngredients) ?>
-            <input type="submit" value="Submit" class="btn btn-success">
+            <input type="submit" value="Submit" class="btn btn-success submit-filter-button">
+            <p class="filter-error-message" ></p>
         </form>
     </div>
     <div class="col-12 addRecipeAccordion">
