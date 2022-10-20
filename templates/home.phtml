@@ -25,7 +25,11 @@
         </div>
     </nav>
     <div class="col-12 filter-accordion">
-        <h2 class="text-center" >Filter recipes</h2>
+        <h2 class="text-center" >Filter recipes by ingredients:</h2>
+        <form id="filter-checklist">
+            <?= App\ViewHelpers\FilterViewHelper::displayIngredientsChecklist($userIngredients) ?>
+            <input type="submit" value="Submit" class="btn btn-success">
+        </form>
     </div>
     <div class="col-12 addRecipeAccordion">
         <h2 class="text-center" >Add a new recipe</h2>

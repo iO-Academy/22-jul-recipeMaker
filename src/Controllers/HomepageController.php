@@ -35,7 +35,7 @@ class HomepageController extends Controller
                     }
                 }
             }
-
+            $args['userIngredients'] = array_unique($userIngredients);
             $args['userRecipes'] = $userRecipes;
             return $this->renderer->render($response, 'home.phtml', $args);
         } else {

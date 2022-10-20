@@ -31,4 +31,14 @@ class IngredientEntity
     {
         return $this->recipeId;
     }
+
+    /**
+     * returns name when called as a string
+     *
+     * @return string
+     */
+    public function __toString()
+    {
+        return $this->name;
+    }
 }
