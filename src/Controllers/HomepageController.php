@@ -25,6 +25,12 @@ class HomepageController extends Controller
     public function __invoke(Request $request, Response $response, array $args)
     {
         if ($_SESSION['loggedIn'] == true) {
+
+            // get query
+            // check for comma
+            // if there is explode on comma
+            // array - foreach
+            // filter and match recipes
             $userEmail = $_SESSION['user'];
             $userRecipes = $this->recipeModel->getUserRecipes($userEmail);
             $userIngredients = $this->ingredientModel->getUserIngredients($userEmail);
@@ -35,7 +41,7 @@ class HomepageController extends Controller
                     }
                 }
             }
-
+            $args['userIngredients'] = array_unique($userIngredients);
             $args['userRecipes'] = $userRecipes;
             return $this->renderer->render($response, 'home.phtml', $args);
         } else {
