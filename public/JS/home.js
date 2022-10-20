@@ -69,7 +69,11 @@ const createGetData = (data) => {
 submitFilterBtn.addEventListener('click', (e) => {
     e.preventDefault()
     let data = getAndValidateFilterData()
-    window.location.href = `/?${createGetData(data)}`
+    if (data.length == 0) {
+        window.location.href = `/`
+    } else {
+        window.location.href = `/?${createGetData(data)}`
+    }
 })
 
 addRecipeBtn.addEventListener('click', (e) => {
