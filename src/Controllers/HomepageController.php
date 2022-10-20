@@ -27,15 +27,12 @@ class HomepageController extends Controller
         if ($_SESSION['loggedIn'] == true) {
             $userEmail = $_SESSION['user'];
             $userRecipes = $this->recipeModel->getUserRecipes($userEmail);
-            //get all ingredients
             $userIngredients = $this->ingredientModel->getUserIngredients($userEmail);
-            //foreach through to see where recipe id matches that in userrecipes
 
             foreach ($userRecipes as $recipe) {
-                $recipe->ingredients = [];
                 foreach ($userIngredients as $ingredient) {
                     if ($ingredient->getRecipeId() === $recipe->getRecipeId()) {
-                        array_push($recipe->ingredients, $ingredient);
+                        $recipe->addIngredient($ingredient);
                     }
                 }
             }
