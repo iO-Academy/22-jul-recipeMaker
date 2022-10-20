@@ -1,17 +1,68 @@
-const addRecipeBtn = document.querySelector('#addRecipeBtn');
+const addRecipeBtn = document.querySelector('#addRecipeBtn')
 const addRecipeAccordion = document.querySelector('.addRecipeAccordion')
 const submitRecipeBtn = document.querySelector('.submitRecipeBtn')
 const newRecipeForm = document.querySelector('#newRecipeForm')
+const ingredientsBtn = document.querySelector('.ingredients-button')
+const ingredientsList = document.querySelector('.ingredients-list')
+const ingredientErrorMessage = document.querySelector('.ingredientErrorMessage')
+const ingredientInputField = document.querySelector('.ingredientsInput')
+const dataList = document.querySelector('datalist')
+
+let ingredientsArray = []
+
+ingredientInputField.addEventListener('focus', () => {
+    dataList.innerHTML = ''
+    fetch('/ingredients', {
+        method: 'GET',
+        headers: {
+            'content-type': 'application/json'
+        }
+    })
+    .then(data => data.json())
+    .then((response) => {
+        let autocompleteData = response.data
+        autocompleteData.forEach(datum => {
+            let optTag = document.createElement('option')
+            optTag.innerHTML = datum.name
+            dataList.appendChild(optTag)
+        })
+    })
+})
 
 addRecipeBtn.addEventListener('click', (e) => {
     e.preventDefault()
     if (addRecipeAccordion.style.maxHeight) {
-        addRecipeAccordion.style.maxHeight = null;
+        addRecipeAccordion.style.maxHeight = null
         e.currentTarget.textContent = "+"
     } else {
-        addRecipeAccordion.style.maxHeight = addRecipeAccordion.scrollHeight + "px";
+        addRecipeAccordion.style.maxHeight = addRecipeAccordion.scrollHeight + "px"
         e.currentTarget.textContent = "-"
-      }
+    }
+})
+
+ingredientsBtn.addEventListener('click', (e) => {
+    e.preventDefault()
+    ingredientErrorMessage.innerHTML = ''
+    let ingredient = newRecipeForm.elements['ingredients'].value.toLowerCase()
+    if (validateIngredient(ingredient, ingredientsArray)) {
+        ingredientsArray.push(ingredient)
+        let divTag = document.createElement('div')
+        divTag.classList.add('d-flex', 'align-items-center', )
+        divTag.innerHTML += '<li>' + ingredient + '</li>'
+        divTag.innerHTML += '<button type="button" class="remove-ingredient-button">x</button>'
+        ingredientsList.appendChild(divTag)
+        newRecipeForm.elements['ingredients'].value = ''
+        newRecipeForm.elements['ingredients'].focus()
+    
+        let removeIngredientsBtns = document.querySelectorAll('.remove-ingredient-button')
+        removeIngredientsBtns.forEach(button => {
+            button.addEventListener('click', (e) => {
+                e.preventDefault()
+                removeIngredientOnce(ingredientsArray, button.previousElementSibling.textContent)
+                button.parentElement.remove()
+            })
+        })
+    }
 })
 
 const getFormData = () => {
@@ -25,40 +76,43 @@ const getFormData = () => {
         data.cookTime = newRecipeForm.elements['cookingTime'].value
         data.prepTime = newRecipeForm.elements['prepTime'].value
     }
+    if (ingredientsArray !== []) {
+        data.ingredients = ingredientsArray
+    }
     return data
 }
 
 const validateForm = (data) => {
     let success = true
-    let inputs = document.querySelectorAll('.recipeInput');
+    let inputs = document.querySelectorAll('.recipeInput')
     inputs.forEach(function (element) {
         let required = element.getAttribute('data-required')
         if (required && element.value.length < 1) {
-            element.nextElementSibling.innerHTML = element.previousElementSibling.innerHTML + ' is a required field! <br>';
-            success = false;
+            element.nextElementSibling.innerHTML = element.previousElementSibling.innerHTML + ' is a required field! <br>'
+            success = false
         } else {
             element.nextElementSibling.innerHTML = ''
         }
 
         if (element.className === 'recipeInput strInput') {
             if (validateString(element.value) === false) {
-                element.nextElementSibling.innerHTML = element.previousElementSibling.innerHTML + ' must be a valid name <br>';
+                element.nextElementSibling.innerHTML = element.previousElementSibling.innerHTML + ' must be a valid name <br>'
                 success = false
             }
         }
         
         if (required && element.className === 'recipeInput numInput') {
             if (validateNum(element.value) === false) {
-                element.nextElementSibling.innerHTML = element.previousElementSibling.innerHTML + ' must be a valid number <br>';
+                element.nextElementSibling.innerHTML = element.previousElementSibling.innerHTML + ' must be a valid number <br>'
                 success = false
             }
         }
 
         if (element.className === "recipeInput insInput") {
-            let maxLength = element.getAttribute('data-max');
+            let maxLength = element.getAttribute('data-max')
             if (maxLength != null && element.value.length > maxLength) {
-                element.nextElementSibling.innerHTML = element.previousElementSibling.innerHTML + ' is too long, must be less than ' + maxLength + ' characters! <br>';
-                success = false;
+                element.nextElementSibling.innerHTML = element.previousElementSibling.innerHTML + ' is too long, must be less than ' + maxLength + ' characters! <br>'
+                success = false
             }
         }
     })
@@ -95,7 +149,7 @@ submitRecipeBtn.addEventListener('click', (e) => {
                 let alerts = document.querySelector('#alerts')
                 alerts.textContent = 'Something went wrong'
             } else {
-                window.location.href = "/";
+                window.location.href = "/"
             }
         })
     } else {
@@ -117,7 +171,7 @@ const setRequiredRecipeTimes = (form) => {
 }
 
 const validateString = (string) => {
-    let pattern = /^[a-zA-Z0-9 ,.'-]+$/i;
+    let pattern = /^[a-zA-Z0-9 ,.'-]+$/i
     if(pattern.test(string) && string.length < 255) {
         return true
     } else {
@@ -126,10 +180,32 @@ const validateString = (string) => {
 }
 
 const validateNum = (num) => {
-    let pattern = /^[0-9]+$/i;
+    let pattern = /^[0-9]+$/i
     if(pattern.test(num) && num.length < 10) {
         return true
     } else {
         return false
     }
+}
+
+const removeIngredientOnce = (arr, value) => {
+    let index = arr.indexOf(value)
+    if (index > -1) {
+      arr.splice(index, 1)
+    }
+    return arr
+  }
+
+const validateIngredient = (ingredient, ingredientsArray) => {
+    let success = true
+    if (ingredientsArray.includes(ingredient)) {
+        ingredientErrorMessage.innerHTML = 'Ingredient already added'
+        success = false
+    }
+
+    if (validateString(ingredient) === false) {
+        ingredientErrorMessage.innerHTML = 'Ingredient must be alphanumeric'
+        success = false
+    }
+    return success
 }

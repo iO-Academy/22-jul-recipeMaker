@@ -9,6 +9,7 @@ return function (App $app) {
 
     $app->get('/', 'HomepageController');
     $app->post('/', 'AddRecipeController');
+    $app->get('/ingredients', 'GetIngredientsController');
     $app->get('/login', 'LoginController');
     $app->post('/login', 'AcceptLoginController');
 };
