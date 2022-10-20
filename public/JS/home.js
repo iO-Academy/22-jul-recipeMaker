@@ -7,6 +7,8 @@ const ingredientsList = document.querySelector('.ingredients-list')
 const ingredientErrorMessage = document.querySelector('.ingredientErrorMessage')
 const ingredientInputField = document.querySelector('.ingredientsInput')
 const dataList = document.querySelector('datalist')
+const filterBtn = document.querySelector('#filter-button')
+const filterAccordion = document.querySelector('.filter-accordion')
 
 let ingredientsArray = []
 
@@ -27,6 +29,15 @@ ingredientInputField.addEventListener('focus', () => {
             dataList.appendChild(optTag)
         })
     })
+})
+
+filterBtn.addEventListener('click', (e) => {
+    e.preventDefault()
+    if (filterAccordion.style.maxHeight) {
+        filterAccordion.style.maxHeight = null
+    } else {
+        filterAccordion.style.maxHeight = filterAccordion.scrollHeight + "px"
+    }
 })
 
 addRecipeBtn.addEventListener('click', (e) => {

@@ -65,7 +65,7 @@ body::-webkit-scrollbar {
     background-color: #4d9e51;
 }
 
-.addRecipeAccordion {
+.addRecipeAccordion, .filter-accordion {
     background-color: rgb(208, 244, 247);
     max-height: 0;
     overflow: hidden;
@@ -76,6 +76,10 @@ body::-webkit-scrollbar {
 }
 
 .addRecipeAccordion::-webkit-scrollbar { 
+    display: none;  /* Safari and Chrome */
+}
+
+.filter-accordion::-webkit-scrollbar { 
     display: none;  /* Safari and Chrome */
 }
 
