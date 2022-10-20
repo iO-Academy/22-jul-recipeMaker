@@ -18,15 +18,15 @@ ingredientInputField.addEventListener('focus', () => {
             'content-type': 'application/json'
         }
     })
-        .then(data => data.json())
-        .then((response) => {
-            let autocompleteData = response.data
-            console.log(autocompleteData)
-            autocompleteData.forEach(datum => {
-                let optTag = document.createElement('option')
-                optTag.innerHTML = datum.name
-                dataList.appendChild(optTag)
-            })
+    .then(data => data.json())
+    .then((response) => {
+        let autocompleteData = response.data
+        console.log(autocompleteData)
+        autocompleteData.forEach(datum => {
+            let optTag = document.createElement('option')
+            optTag.innerHTML = datum.name
+            dataList.appendChild(optTag)
+        })
     })
 })
 
@@ -65,7 +65,6 @@ ingredientsBtn.addEventListener('click', (e) => {
         })
     }
 })
-
 
 const getFormData = () => {
     let data = {
