@@ -12,7 +12,7 @@ class RecipeEntity
     private $email;
     private $userId;
     private $recipeId;
-    // private $ingredients;
+    private $ingredients = [];
 
    /**
     * Get name
@@ -87,23 +87,22 @@ class RecipeEntity
         return $this->recipeId;
     }
 
-    // /**
-    //  * Get the value of ingredients
-    //  */
-    // public function getIngredients()
-    // {
-    //     return $this->ingredients;
-    // }
+    /**
+     * Get the value of ingredients
+     */
+    public function getIngredients(): array
+    {
+        return $this->ingredients;
+    }
 
-    // /**
-    //  * Set the value of ingredients
-    //  *
-    //  * @return  self
-    //  */
-    // public function setIngredients($ingredients)
-    // {
-    //     $this->ingredients = $ingredients;
-
-    //     return $this;
-    // }
+    /**
+     * adds an ingredient
+     *
+     * @param IngredientEntity $ingredient
+     * @return void
+     */
+    public function addIngredient(IngredientEntity $ingredient): void
+    {
+        $this->ingredients[] = $ingredient;
+    }
 }
