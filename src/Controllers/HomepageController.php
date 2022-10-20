@@ -32,10 +32,11 @@ class HomepageController extends Controller
             //foreach through to see where recipe id matches that in userrecipes
 
             foreach ($userRecipes as $recipe) {
-                $recipe->ingredients = [];
+                // $recipe->ings = [];
                 foreach ($userIngredients as $ingredient) {
                     if ($ingredient->getRecipeId() === $recipe->getRecipeId()) {
-                        array_push($recipe->ingredients, $ingredient);
+                        $recipe->addIngredient($ingredient);
+                        // array_push($recipe->ings, $ingredient);
                     }
                 }
             }

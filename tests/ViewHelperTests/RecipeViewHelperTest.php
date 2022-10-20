@@ -28,6 +28,10 @@ class RecipeViewHelperTest extends TestCase
         $entityMock->method('getInstructions')->willReturn('do the thing');
         $entityMock->method('getEmail')->willReturn('mike@key.com');
 
+        // $entityMock = $this->createMock(RecipeEntity::class);
+        // $entityMock->method('getName')->willReturn('mikey');
+        // $entityMock->method('getDuration')->willReturn('45');
+
         $userRecipes = [$entityMock];
         $result = RecipeViewhelper::displayUserRecipes($userRecipes);
         $this->assertEquals($expected, $result);

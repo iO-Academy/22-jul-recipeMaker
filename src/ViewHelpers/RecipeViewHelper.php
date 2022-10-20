@@ -30,7 +30,7 @@ class RecipeViewhelper
                 '' : '<p class="m-1">Preparation time: ' . $userRecipe->getPrepTime() . ' mins</p>';
             $result .= '</div>';
             $result .= '<p class="font-weight-bold m-1">Ingredients: </p>';
-            $result .= '<ul>' . self::displayIngredients($userRecipe->ingredients) . '</ul>';
+            $result .= '<ul>' . self::displayIngredients($userRecipe->getIngredients()) . '</ul>';
             $result .= '<p class="font-weight-bold m-1">Instructions: </p>';
             $result .= '<p class="m-0 p-1">' . $userRecipe->getInstructions() . '</p>';
             $result .= '</div></div>';
@@ -55,11 +55,14 @@ class RecipeViewhelper
         return $output;
     }
 
-    private static function displayIngredients($ingredients): string
+    private static function displayIngredients(array $ingredients): string
     {
         $result = '';
         foreach ($ingredients as $ingredient) {
             $result .= '<li class="ingredient">' . $ingredient->getName() . '</li>';
+        }
+        if ($result === '') {
+            $result = '<li class="ingredient">No ingredients to be displayed</li>';
         }
         return $result;
     }
