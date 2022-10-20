@@ -69,20 +69,7 @@ const createGetData = (data) => {
 submitFilterBtn.addEventListener('click', (e) => {
     e.preventDefault()
     let data = getAndValidateFilterData()
-
-    fetch(`/?${createGetData(data)}`, {
-        method: 'GET',
-        headers: {
-            'content-type': 'application/json'
-        }
-    })
-    .then(data => data.json())
-    .then((response) => {
-        if (!response.success) {
-            let alerts = document.querySelector('#alerts')
-            alerts.textContent = 'Something went wrong'
-        }
-    })
+    window.location.href = `/?${createGetData(data)}`
 })
 
 addRecipeBtn.addEventListener('click', (e) => {
