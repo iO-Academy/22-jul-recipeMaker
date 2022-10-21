@@ -137,7 +137,7 @@ class RecipeModel
                 }
                 sort($ingredientArray);
                 sort($filteredIds);
-                if ($ingredientArray === $filteredIds) {
+                if (array_diff($ingredientArray, $filteredIds) == []) {
                     array_push($filteredRecipes, $recipe);
                 }
             }
