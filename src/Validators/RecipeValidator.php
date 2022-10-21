@@ -25,7 +25,7 @@ class RecipeValidator
                 self::validateRecipe($recipe['prepTime'], 10);
             }
             self::validateRecipe($recipe['instructions'], 10000);
-            if (isset($recipe['ingredients'])) {
+            if (isset($recipe['ingredients']) && count($recipe['ingredients'])) {
                 foreach ($recipe['ingredients'] as $ingredient) {
                     self::validateRecipe($ingredient, 100);
                 }

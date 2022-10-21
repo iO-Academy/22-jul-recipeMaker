@@ -182,6 +182,7 @@ submitRecipeBtn.addEventListener('click', (e) => {
     let data = getFormData()
     setRequiredRecipeTimes(data)
     let validate = validateForm(data)
+    console.log(data)
     if (validate) {
         fetch('/', {
             method: 'POST',

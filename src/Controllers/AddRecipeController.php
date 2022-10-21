@@ -49,7 +49,7 @@ class AddRecipeController extends Controller
             $userId = $_SESSION['userId'];
             $result = $this->recipeModel->linkRecipeToUser($userId, $recipeId);
 
-            if (isset($validatedRecipe['ingredients'])) {
+            if (isset($validatedRecipe['ingredients']) && count($validatedRecipe['ingredients'])) {
                 $storedIngredients = $this->ingredientModel->getAllIngredients();
                 $duplicateIngredientIds = $this->ingredientModel::filterDuplicateIngredients(
                     $validatedRecipe['ingredients'],
