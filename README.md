@@ -37,6 +37,6 @@ Composer install
 ```
 The application will now be available wherever you access it
 ### Authors
-- Aidan Maskell - [@aidanmaskell](github.com/aidanmaskell)
-- Chris Walton - [@cr-walton](github.com/cr-walton)
-- Mikey Ying - [@mikeycodingstuff](github.com/mikeycodingstuff)
+- Aidan Maskell - [@aidanmaskell](https://github.com/aidanmaskell)
+- Chris Walton - [@cr-walton](https://github.com/cr-walton)
+- Mikey Ying - [@mikeycodingstuff](https://github.com/mikeycodingstuff)
