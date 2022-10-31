@@ -25,10 +25,6 @@ Navigate into the newly created repo:
 ```
 cd 22-jul-recipeMaker
 ```
-From the root of the project run:
-```
-Composer install
-```
 Install the database `fishFood.sql` into a db named `fishFood`
 
 Ensure your local database host, username and password details are correct in:
