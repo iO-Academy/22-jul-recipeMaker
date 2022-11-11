@@ -4,7 +4,7 @@ namespace App\ViewHelpers;
 
 use App\Entities\IngredientEntity;
 
-class RecipeViewhelper
+class RecipeViewHelper
 {
     /**
      * Displays the user's recipes
