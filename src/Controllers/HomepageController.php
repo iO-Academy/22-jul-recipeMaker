@@ -24,7 +24,7 @@ class HomepageController extends Controller
 
     public function __invoke(Request $request, Response $response, array $args)
     {
-        if ($_SESSION['loggedIn'] == true) {
+        if (isset($_SESSION['loggedIn'])) {
             $userEmail = $_SESSION['user'];
             $userRecipes = $this->recipeModel->getUserRecipes($userEmail);
             $userIngredients = $this->ingredientModel->getUserIngredients($userEmail);
